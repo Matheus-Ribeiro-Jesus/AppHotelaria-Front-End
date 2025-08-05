@@ -1,7 +1,16 @@
+
+
+form{
+    padding: 13px 14px;
+}
+
 .inputs{
     border-radius: 10px;
     text-align: center;
     border-color: grey;
+    margin: 6px;
+    top: 10px;
+
 
 }
 
