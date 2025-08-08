@@ -1,5 +1,6 @@
-
-
+body{
+    background: linear-gradient(rgb(14, 6, 6), rgb(41, 41, 238));
+}
 form{
     padding: 13px 14px;
 }
@@ -7,16 +8,14 @@ form{
 .inputs{
     border-radius: 10px;
     text-align: center;
-    border-color: grey;
-    margin: 6px;
-    top: 10px;
-
-
+    margin-bottom: 15px;
+    padding: 5px;
+    border: 1px solid #e42424;
+   
 }
 
-.button-login{
-    border-radius: 10px;
-    margin-left: 10px;
-    border-color: grey;
 
+.inputs:focus {
+    border: 1px solid #be199b;
+    outline: none;
 }

@@ -2,6 +2,9 @@ export default function LoginForm(){
 
     // Campo email
     const formulario = document.createElement('form');
+
+    formulario.className = 'd-flex flex-column';
+
     const email = document.createElement('input');
     email.type = 'email';
     email.placeholder = "Digite seu email";
@@ -14,13 +17,12 @@ export default function LoginForm(){
     senha.className = 'inputs';
     formulario.appendChild(senha);
     
-    
     const entrar = document.createElement('button');
     entrar.type = 'submit';
-    entrar.className = "button-login";
+    entrar.className = "btn btn-primary";
     entrar.textContent = "Entrar";
     formulario.appendChild(entrar);
-
+    
     return formulario;
 
 }
