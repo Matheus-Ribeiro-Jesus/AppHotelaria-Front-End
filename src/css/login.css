@@ -1,33 +1,8 @@
 body{
-    background: #fff700;
-    background: linear-gradient(90deg, rgba(255, 247, 0, 1) 0%, rgba(255, 108, 0, 1) 35%, rgba(255, 51, 0, 1) 84%, rgba(255, 47, 0, 1) 65%, rgba(255, 0, 0, 1) 100%);
+    background-color: grey;
 }
 form{
     padding: 13px 14px;
 
 }
 
-
-.btn-primary{
-    background-color: rgb(145, 146, 146);
-    border: none;
-}
-
-.btn-primary:hover{
-    background-color: rgb(136, 136, 136);
-    border: none;
-}
-
-.inputs{
-    border-radius: 10px;
-    text-align: center;
-    margin-bottom: 15px;
-    padding: 5px;
-    border: 1px solid #dbd5d5;
-   
-}
-
-.inputs:focus {
-    border: 1px solid #dbd5d5;
-    outline: none;
-}
