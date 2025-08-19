@@ -1,50 +1,43 @@
 import LoginForm from "../components/loginForm.js";
-
+import Navbar from "../components/menu.js";
 
 export default function renderRegisterPage(){
-        const divRoot = document.getElementById('root');
-        divRoot.innerHTML = '';
-        
-        //Dentro da Div root terá a div container,  e em container estará o formulario
-        
-        const formulario = LoginForm();
+    const nav = document.getElementById('navbar');
+    nav.innerHTML = '';
 
-        const titulo = document.createElement('h1');
-        titulo.textContent = 'Crie uma conta';
-        titulo.className = 'titulo';
-        titulo.style.color = 'white';
-        titulo.style.textAlign = 'center';
-    
-        const container = document.createElement('div');
-        container.className = 'card p-4 shadow-lg'; //Classe do bootstrap para criar um card
-        container.style.width = '100%'; //Aplicando a largura de 100% na div container pra ocupar a tela toda
-        container.style.maxWidth = '470px'; //Até que atinja o maximo de 400px
-        container.style.height = '370px';
-        container.style.border = 'none';
-        container.style.backgroundColor = 'transparent';
-        container.style.backdropFilter = 'blur(10px) brightness(0.8)';
-        divRoot.appendChild(container); //DivRoot contem a nova div
+    const navbar = Navbar();
+    nav.appendChild(navbar);
 
-        const nome = document.createElement('input');
-        nome.placeholder = 'Digite seu nome';
-        nome.className = 'inputs'
+    const formulario = LoginForm();
 
-        const btnRegister = formulario.querySelector('button');
-        btnRegister.textContent = "Criar conta";
+    const titulo = formulario.querySelector('h1');
+    titulo.textContent = 'Cadastre-se';
 
-        const voltarLogin = document.createElement('button');
-        voltarLogin.className = 'voltar';
-        voltarLogin.textContent = 'Voltar ao Login';
+    //selecione o elemento form que esta presente em Loginform
+    const contentForm = formulario.querySelector('form');
+
+    const nome = document.createElement('input');
+    nome.type = 'text';
+    nome.className = 'inputs';
+    nome.placeholder = 'Digite seu nome';
+
+    //Para aducuibar input nome ao contentform localizo onde esta input email pois quero necessariamente adicionar anteriormente a ele
+
+    const inputEmail = formulario.querySelector('input[type="email"]');
+    contentForm.insertBefore(nome, inputEmail);
+
+    const confSenha = document.createElement('input');
+    confSenha.type = 'password';
+    confSenha.placeholder = 'Confirme sua senha';
+    confSenha.className = 'inputs';
+
+    /* Adicionar confSenha como "chield" de contentForm que ja existe
+        4 elementos: input nome[0], input email[1], input password[2],
+        button btn[3], no momento que eu adicionar input confsenha ele ocupara a posição 3
+        */
+    contentForm.insertBefore(confSenha, contentForm.children[3]);
 
 
-        voltarLogin.addEventListener('click', () => {
-            window.location.href = '../public/login.html';
-        });
-
-        document.body.appendChild(voltarLogin);
-
-        container.appendChild(titulo);
-        container.appendChild(nome);
-        container.appendChild(formulario); 
-        container.appendChild(voltarLogin);
+    const btnRegister = formulario.querySelector('button');
+    btnRegister.textContent = 'Criar contar';
 }

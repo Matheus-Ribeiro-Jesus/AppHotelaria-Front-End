@@ -1,5 +1,3 @@
-import { createElement } from "react";
-
 export default function LoginForm(){
 
     const DivRoot = document.getElementById('root');
@@ -44,7 +42,8 @@ export default function LoginForm(){
     formulario.appendChild(entrar);
     container.appendChild(titulo);
     container.appendChild(formulario);
-    
+
     return DivRoot;
+
 
 }

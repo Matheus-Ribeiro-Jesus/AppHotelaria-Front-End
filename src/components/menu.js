@@ -4,7 +4,7 @@ export default function Navbar(){
         <nav class="navbar navbar-expand-lg bg-body-tertiary" style = "background-color: black">
             <div class="container-fluid" >
                 <a class="navbar-brand" href="../public/home.html">
-                    <img src="../public/assets/imgs/logo.png" style = "width: 90px; height: 90px;">
+                    <img src="../public/assets/imgs/logo.png" style = "width: 50px; height: 50px;">
                 </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -29,7 +29,10 @@ export default function Navbar(){
                 </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+                    <a class="nav-link" href="#/register">Cadastre-se</a>
+                 </li>
+               <li class="nav-item">
+                    <a class="nav-link" href="#/login">Login</a>
                 </li>
             </ul>
             <form class="d-flex" role="search">

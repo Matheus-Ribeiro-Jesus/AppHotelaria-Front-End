@@ -8,7 +8,6 @@ export default function renderLoginPage() {
     
     const navbar = Navbar();
     nav.appendChild(navbar);
-
     
     const formulario = LoginForm();
     
