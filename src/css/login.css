@@ -1,8 +1,12 @@
 body{
-    background-color: grey;
+    background-image: url('/public/assets/imgs/background.jpg');
+    background-position: center;
 }
 form{
     padding: 13px 14px;
 
 }
 
+.registerButton{
+    margin-top: 15px;
+}

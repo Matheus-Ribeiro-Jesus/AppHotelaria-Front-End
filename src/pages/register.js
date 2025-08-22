@@ -34,7 +34,7 @@ export default function renderRegisterPage(){
     /* Adicionar confSenha como "chield" de contentForm que ja existe
         4 elementos: input nome[0], input email[1], input password[2],
         button btn[3], no momento que eu adicionar input confsenha ele ocupara a posição 3
-        */
+    */
     contentForm.insertBefore(confSenha, contentForm.children[3]);
 
 

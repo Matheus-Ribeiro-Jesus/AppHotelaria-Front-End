@@ -10,5 +10,15 @@ export default function renderLoginPage() {
     nav.appendChild(navbar);
     
     const formulario = LoginForm();
+
+    //selecione o elemento form que esta presente em Loginform
+    const contentForm = formulario.querySelector('form');
+    
+    const criarConta = document.createElement('a');
+    criarConta.href = '#/register';
+    criarConta.className = 'registerButton';
+    criarConta.textContent = 'Criar Conta';
+
+    contentForm.insertBefore(criarConta, contentForm.children[3]);
     
 }

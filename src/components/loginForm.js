@@ -7,7 +7,7 @@ export default function LoginForm(){
     container.className = 'card p-4 shadow-lg'; //Classe do bootstrap para criar um card
     container.style.width = '100%'; //Aplicando a largura de 100% na div container pra ocupar a tela toda
     container.style.maxWidth = '470px'; //Até que atinja o maximo de 400px
-    container.style.height = '370px';
+    container.style.height = '430px';
     container.style.border = 'none';
     container.style.backgroundColor = 'transparent';
     container.style.backdropFilter = 'blur(10px) brightness(0.8)';
@@ -29,7 +29,7 @@ export default function LoginForm(){
     formulario.appendChild(email);
     
     const senha = document.createElement('input');
-    senha.type = 'senha';
+    senha.type = 'password';
     senha.placeholder = "Digite sua senha";
     senha.className = 'inputs';
     formulario.appendChild(senha);
@@ -38,7 +38,7 @@ export default function LoginForm(){
     entrar.type = 'submit';
     entrar.className = "btn btn-primary";
     entrar.textContent = "Entrar";
-    
+
     formulario.appendChild(entrar);
     container.appendChild(titulo);
     container.appendChild(formulario);
