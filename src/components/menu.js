@@ -3,7 +3,7 @@ export default function Navbar(){
     navbar.innerHTML = `
         <nav class="navbar navbar-expand-lg bg-body-tertiary" style = "background-color: black">
             <div class="container-fluid" >
-                <a class="navbar-brand" href="../public/home.html">
+                <a class="navbar-brand" href="../public/index.html">
                     <img src="../public/assets/imgs/logo.png" style = "width: 50px; height: 50px;">
                 </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

@@ -9,4 +9,17 @@ form{
 
 .registerButton{
     margin-top: 15px;
+    color: white;
+    text-decoration: none;
 }
+.registerButton:hover{
+    color: #0400ff;
+    text-decoration: none;
+
+}
+
+.registerContainer{
+    margin-top: 10px;
+    color: white;
+}
+
