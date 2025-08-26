@@ -39,5 +39,5 @@ export default function renderRegisterPage(){
 
 
     const btnRegister = formulario.querySelector('button');
-    btnRegister.textContent = 'Criar contar';
+    btnRegister.textContent = 'Criar conta';
 }

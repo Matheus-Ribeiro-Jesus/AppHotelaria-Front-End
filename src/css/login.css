@@ -1,6 +1,7 @@
 body{
     background-image: url('/public/assets/imgs/background.jpg');
     background-position: center;
+    background-size: cover;
 }
 form{
     padding: 13px 14px;
@@ -10,11 +11,9 @@ form{
 .registerButton{
     margin-top: 15px;
     color: white;
-    text-decoration: none;
 }
 .registerButton:hover{
-    color: #0400ff;
-    text-decoration: none;
+    color: #00c3ff;
 
 }
 

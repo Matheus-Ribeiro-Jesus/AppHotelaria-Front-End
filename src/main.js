@@ -1,9 +1,11 @@
 import renderLoginPage from "./pages/login.js";
+import renderHomePage from "./pages/home.js";
 import renderRegisterPage from "./pages/register.js";
 
 const routes = {
     "/login": renderLoginPage,
-    "/register": renderRegisterPage
+    "/register": renderRegisterPage,
+    "/home":  renderHomePage
     //Novas paginas aqui adicionadas conforme desenvolvidas
 };
 
@@ -15,13 +17,13 @@ function getPath(){
     console.log(url);
 
     //retorna a url se começar com / 
-    return url && url.startsWith("/") ? url : "/login";
+    return url && url.startsWith("/") ? url : "/home";
 
 }
 
 function renderRoutes(){
     const url = getPath(); // lê a rota atual
-    const render = routes[url] || routes["/login"]; // Busca esta rota no mapa
+    const render = routes[url] || routes["/home"]; // Busca esta rota no mapa
     render(); //Executa a função de render na pagina atual 
 }
 
