@@ -1,6 +1,6 @@
 export default function Hero(){
     const containerHero = document.createElement('div');
-
+    containerHero.className = 'heroContainer';
     containerHero.innerHTML = `
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">

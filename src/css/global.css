@@ -71,3 +71,14 @@ form{
     border: 1px solid #dbd5d5;
     outline: none;
 }
+
+.heroContainer {
+  width: 100% !important;
+  max-height: 400px !important;
+  overflow: hidden;
+}
+
+.heroContainer .carousel-item img {
+  height: 400px !important;
+  object-fit: cover; 
+}
