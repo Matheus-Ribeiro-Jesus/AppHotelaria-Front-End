@@ -1,3 +1,28 @@
+
+body{
+    background-image: url('/public/assets/imgs/background.jpg');
+    background-position: center;
+    background-size: cover;
+}
+form{
+    padding: 13px 14px;
+}
+
+.registerButton{
+    margin-top: 15px;
+    color: white;
+}
+.registerButton:hover{
+    color: #00c3ff;
+
+}
+
+.registerContainer{
+    margin-top: 10px;
+    color: white;
+}
+
+
 .titulo{
     font-family: "Lato", sans-serif;
     font-weight: 700;

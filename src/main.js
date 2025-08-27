@@ -9,24 +9,22 @@ const routes = {
     //Novas paginas aqui adicionadas conforme desenvolvidas
 };
 
-//Obtem o caminho atual a partir do hash da URL
-
+//Obtem o caminho atual a parte do nome 
 function getPath(){
-    //obtem o hash 
-    const url = (location.hash || "").replace(/^#/, "").trim();
-    console.log(url);
-
-    //retorna a url se começar com / 
+    //Exemplo: botem "/login"
+    const url = (location.pathname || "").replace("/estudo_php/", "/").trim();
+    // retorna URL se começar com "/", se nao retorna "/home" como padrão 
     return url && url.startsWith("/") ? url : "/home";
 
 }
 
+
+//Decide o que renderizar com base na rota atual
 function renderRoutes(){
-    const url = getPath(); // lê a rota atual
+    const url = getPath(); // lê a rota atual exemplo: "/register"
     const render = routes[url] || routes["/home"]; // Busca esta rota no mapa
     render(); //Executa a função de render na pagina atual 
 }
 
-window.addEventListener("hashchange", renderRoutes);
-
+//Renderização
 document.addEventListener('DOMContentLoaded', renderRoutes);

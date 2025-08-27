@@ -15,13 +15,10 @@
     $route = $seguimentos[0] ??  null;
     $subRoute = $seguimentos[1] ??  null;
 
-    if($route === ""){
-        echo "Pagina Inicial";
+    if($route != "api"){
+        require __DIR__ . "/public/index.html";
         exit;
-
-    }elseif(in_array($route, ["home", "sobre"])){
-        echo $route;
-        exit;
+        
     }elseif($route === "api"){
         if(in_array($subRoute, ["login"])){
             require "routes/${subRoute}.php";
