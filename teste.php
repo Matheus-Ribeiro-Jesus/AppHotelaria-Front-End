@@ -9,8 +9,10 @@
         "senha"=>"123345"
     ];
 
+    // AuthController::login($conn, $data);
 
-    AuthController::login($conn, $data);
+    $token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJtZXVzaXRlIiwiaWF0IjoxNzU2OTMwMjA0LCJleHAiOjE3NTY5MzM4MDQsInN1YiI6eyJpZCI6NCwibm9tZSI6Ik1hdGhldXMyIiwiZW1haWwiOiJtYXRoZXVzMkBnbWFpbC5jb20iLCJjYXJnbyI6IkFkbWluaXN0cmFkb3IifX0.RepxquuaAlTzml002J9cEVDZccecAjBF3llMp_A2Uoc";
+    echo var_dump(validateToken($token));
 
     // $usuarios = ClientModel::listarTodos($conn);
 

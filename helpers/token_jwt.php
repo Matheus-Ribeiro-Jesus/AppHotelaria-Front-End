@@ -10,8 +10,16 @@
             "exp" => time() + (60 * (60 * 1)),
             "sub" => $user 
         ];
-        return JWT::encode($payload, SECRET_KEY);
+        return JWT::encode($payload, SECRET_KEY, "HS256");
     }
-
+    function validateToken($token){
+        try{
+           $key = new Key(SECRET_KEY, "HS256");
+           $decode = JWT::decode($token, $key);
+           return $decode->sub;
+        }catch(Exception $erro) {
+          return 'deu merda';
+    }
+}
 
 ?>
