@@ -7,4 +7,6 @@ define("DB_USER", "root");
 define("DB_PASSWORD", "");
 define("DB_NAME", "projecthotel");
 
+define("SECRET_KEY", "projecthotel");
+
 ?>
