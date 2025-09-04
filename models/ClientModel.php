@@ -14,7 +14,7 @@ class ClientModel {
     }
 
     public static function buscarPorId($conn) {
-        $sql = "SELECT * FROM usuarios WHERE id = 1";
+        $sql = "SELECT * FROM usuarios WHERE id = ?";
         $result = $conn->query($sql);
         $busca = [];
 
