@@ -7,17 +7,24 @@
     require_once __DIR__ . '/controllers/QuartosController.php';
       
     
-    
+
+
+    // QuartosController::getBydId($conn, 3);
+
+    // QuartosController::delete($conn, 5);
+
+  
     $data = [
-        "nome" => "Quarto Prime",
-        "numero" => 1,
-        "qtd_cama_casal" => 0,
+        "nome" => "Luxuoso",
+        "numero" => 2,
+        "qtd_cama_casal" => 1,
         "qtd_cama_solteiro" => 0,
         "preco" => 999,
-        "disponivel" => 1,
+        "disponivel" => 1
     ];
-
-    QuartosController::create($conn, $data);
+    
+    QuartosController::update($conn, 4 ,$data);
+    // QuartosController::create($conn, $data);
     
     // $data = [ 
     //     "email"=>"matheus2@gmail.com",
@@ -31,12 +38,6 @@
 
     
     // $usuarios = ClientModel::listarTodos($conn);
-
-    // echo "<h2>Lista de Usuários</h2>";
-    // echo "<ul>";
-    // foreach ($usuarios as $usuario) {
-    //     echo "<li>ID: {$usuario['id']} - Email: {$usuario['email']}</li>";
-    // }
 
 
     
