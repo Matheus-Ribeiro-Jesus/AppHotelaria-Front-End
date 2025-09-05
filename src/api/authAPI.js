@@ -1,18 +1,19 @@
 export async function loginRequest(email, senha){
-    const response = await fetch("/api/login", {
+    const dados = {email, senha};
+    const response = await fetch("api/login", {
         method: "POST",
         headers: {
             "Accept": "application/json",
-            "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
+            "Content-Type": "application/json"
         },
-        body: new URLSearchParams({ email, senha }).toString(),
+        body: JSON.stringify(dados),
+        // body: new URLSearchParams({ email, senha }).toString(),
 
         /* URL da rquisição é a mesma da origem do front (mesmo protocolo http/mesmo dominio - local/mesma porta 80 do servidor web Apache)
         Front: http://localhost/estudo_php/public/index.html
         Back: http://localhost/estudo_php/api/login.php
         */
        credentials: "same-origin"
-
     }); 
 
     let data = null;
@@ -25,10 +26,37 @@ export async function loginRequest(email, senha){
         data = null;
     }
     
+    if(!data || !data.token){
+        const message = "Resposta invalida do servidor, Token invalido";
+        return {ok: false, token: null, raw: data, message};
+    }
+    
     return {
         ok: true,
-        user: data.user ?? null,
+        token: data.token,
         raw: data
     };
-    
+
 }
+    /* Função para salvar a chave token após autenticação confirmada, ao salvar
+    no local storage, o usuario poderá mudar de pagina, fechar o site
+    e ainda assim permanecer logado, DESDE QUE NAO TENHA EXPIRADO (1 HORA)*/
+    export function saveToken(token){
+        localStorage.setItem("auth_token", token);
+        
+    }
+
+    /* Recuperar a chave a cada pagina que o usuario navegar*/
+
+    export function getToken(){
+        return localStorage.getItem("auth_token");
+        
+    }
+
+
+    /*Função para remover a chave token quando usuario deslogar */
+
+    export function clearToken(){
+        localStorage.removeItem("auth_token");
+
+    }

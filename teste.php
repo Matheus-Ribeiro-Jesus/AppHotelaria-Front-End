@@ -9,14 +9,14 @@
 
         
     
-    $data = [
-        "nome" => "Matheus1",
-        "cpf" => "122-422-101",
-        "telefone" => "(15)1234-5237",
-        "email" => "matheus2xx@gmail.com",
-        "senha" => PasswordController::generateHash(1722)
+    // $data = [
+    //     "nome" => "Matheus1",
+    //     "cpf" => "122-422-101",
+    //     "telefone" => "(15)1234-5237",
+    //     "email" => "matheus2xx@gmail.com",
+    //     "senha" => PasswordController::generateHash(1722)
 
-    ];
+    // ];
 
     
 
@@ -41,12 +41,12 @@
     // QuartosController::update($conn, 4 ,$data);
     // QuartosController::create($conn, $data);
     
-    // $data = [ 
-    //     "email"=>"matheus2@gmail.com",
-    //     "senha"=>"123345"
-    // ];
+    $data = [ 
+        "email"=>"matheus2@gmail.com",
+        "senha"=>"123345"
+    ];
     
-    // AuthController::login($conn, $data);
+    AuthController::login($conn, $data);
 
     // $token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJtZXVzaXRlIiwiaWF0IjoxNzU2OTMwMjA0LCJleHAiOjE3NTY5MzM4MDQsInN1YiI6eyJpZCI6NCwibm9tZSI6Ik1hdGhldXMyIiwiZW1haWwiOiJtYXRoZXVzMkBnbWFpbC5jb20iLCJjYXJnbyI6IkFkbWluaXN0cmFkb3IifX0.RepxquuaAlTzml002J9cEVDZccecAjBF3llMp_A2Uoc";
     // echo var_dump(validateToken($token));

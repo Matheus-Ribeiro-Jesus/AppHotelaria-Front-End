@@ -1,15 +1,26 @@
 import LoginForm from "../components/loginForm.js";
 import Navbar from "../components/menu.js";
+import Footer from "../components/footer.js";
 
 export default function renderRegisterPage(){
+    
     const nav = document.getElementById('navbar');
     nav.innerHTML = '';
 
     const navbar = Navbar();
     nav.appendChild(navbar);
 
-    const formulario = LoginForm();
 
+    const fot = document.getElementById('footer');
+    fot.innerHTML = '';
+
+    const footer = Footer();
+    fot.appendChild(footer);
+
+
+
+    
+    const formulario = LoginForm();
     const titulo = formulario.querySelector('h1');
     titulo.textContent = 'Cadastre-se';
 

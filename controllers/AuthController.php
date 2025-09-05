@@ -6,8 +6,7 @@ require_once "PasswordController.php";
 
 class AuthController
 {
-    public static function login($conn, $data)
-    {
+    public static function login($conn, $data){
         $data['email'] = trim($data['email']);
         $data['senha'] = trim($data['senha']);
 

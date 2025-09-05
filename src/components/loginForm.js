@@ -1,49 +1,75 @@
-export default function LoginForm(){
-
+export default function LoginForm() {
     const DivRoot = document.getElementById('root');
     DivRoot.innerHTML = '';
 
+    // Container principal (card)
+
     const container = document.createElement('div');
-    container.className = 'card p-4 shadow-lg'; //Classe do bootstrap para criar um card
-    container.style.width = '100%'; //Aplicando a largura de 100% na div container pra ocupar a tela toda
-    container.style.maxWidth = '470px'; //Até que atinja o maximo de 400px
+    container.className = 'card p-4 shadow-lg d-flex flex-row'; 
+    container.style.width = '100%';
+    container.style.maxWidth = '900px'; 
     container.style.height = '430px';
     container.style.border = 'none';
     container.style.backgroundColor = 'transparent';
     container.style.backdropFilter = 'blur(10px) brightness(0.8)';
-    DivRoot.appendChild(container); //DivRoot contem a nova div
+    container.style.margin = '0 auto'; // Centraliza o card
+
+    // Lado esquerdo (imagem)
+
+    const leftSide = document.createElement('div');
+    leftSide.className = 'left-side d-flex align-items-center justify-content-center';
+    leftSide.style.width = '60%';
+    leftSide.style.backgroundImage = 'url("public/assets/imgs/LeftSide.jpg")';
+    leftSide.style.backgroundSize = 'cover';
+    leftSide.style.backgroundPosition = 'center';
+    leftSide.style.borderRadius = '10px 0 0 10px';
+
+    // Lado direito (formulário)
+
+    const rightSide = document.createElement('div');
+    rightSide.className = 'right-side p-4 d-flex flex-column justify-content-center';
+    rightSide.style.width = '50%';
 
     const titulo = document.createElement('h1');
-    titulo.textContent = 'Faça o login ou crie uma conta';
-    titulo.className = 'titulo';
+    titulo.textContent = 'Login';
+    titulo.className = 'titulo mb-4';
     titulo.style.color = 'white';
     titulo.style.textAlign = 'center';
-    
+
     const formulario = document.createElement('form');
     formulario.className = 'd-flex flex-column';
 
     const email = document.createElement('input');
     email.type = 'email';
     email.placeholder = "Digite seu email";
-    email.className = 'inputs';
+    email.className = 'form-control mb-3';
+    email.style.textAlign = 'center';
     formulario.appendChild(email);
-    
+
+
     const senha = document.createElement('input');
     senha.type = 'password';
     senha.placeholder = "Digite sua senha";
-    senha.className = 'inputs';
+    senha.className = 'form-control mb-3';
+    senha.style.textAlign = 'center';
     formulario.appendChild(senha);
-    
+
     const entrar = document.createElement('button');
     entrar.type = 'submit';
     entrar.className = "btn btn-primary";
     entrar.textContent = "Entrar";
 
     formulario.appendChild(entrar);
-    container.appendChild(titulo);
-    container.appendChild(formulario);
+
+    // Montando a hierarquia
+
+    rightSide.appendChild(titulo);
+    rightSide.appendChild(formulario);
+
+    container.appendChild(leftSide);
+    container.appendChild(rightSide);
+
+    DivRoot.appendChild(container);
 
     return DivRoot;
-
-
 }
