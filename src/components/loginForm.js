@@ -18,7 +18,7 @@ export default function LoginForm() {
 
     const leftSide = document.createElement('div');
     leftSide.className = 'left-side d-flex align-items-center justify-content-center';
-    leftSide.style.width = '60%';
+    leftSide.style.width = '57%';
     leftSide.style.backgroundImage = 'url("public/assets/imgs/LeftSide.jpg")';
     leftSide.style.backgroundSize = 'cover';
     leftSide.style.backgroundPosition = 'center';

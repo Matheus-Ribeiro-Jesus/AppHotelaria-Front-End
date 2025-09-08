@@ -2,9 +2,9 @@ import LoginForm from "../components/loginForm.js";
 import Navbar from "../components/menu.js";
 import Footer from "../components/footer.js";
 import { loginRequest, saveToken } from "../api/authAPI.js";
-
 export default function renderLoginPage() {
     
+
     const nav = document.getElementById('navbar');
     nav.innerHTML = '';
     
