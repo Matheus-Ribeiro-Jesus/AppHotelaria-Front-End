@@ -10,12 +10,20 @@ const routes = {
 };
 
 //Obtem o caminho atual a parte do nome 
-function getPath(){
-    //Exemplo: botem "/login"
-    const url = (location.pathname || "").replace("/estudo_php/", "/").trim();
-    // retorna URL se começar com "/", se nao retorna "/home" como padrão 
-    return url && url.startsWith("/") ? url : "/home";
 
+// function getPath(){
+//     const url = (location.pathname || "").replace("/estudo_php/", "/").trim();
+//     return url && url.startsWith("/") ? url : "/home";
+// }
+
+function getPath() {
+    // Divide o caminho atual em partes
+    const pathParts = location.pathname.split('/').filter(Boolean); // remove vazios
+    // Remove o primeiro item (que é o nome da pasta do projeto)
+    pathParts.shift();
+    // Junta de novo as partes restantes
+    const path = '/' + pathParts.join('/');
+    return path;
 }
 
 
