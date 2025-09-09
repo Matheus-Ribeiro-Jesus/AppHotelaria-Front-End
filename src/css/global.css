@@ -1,126 +1,87 @@
-#root{
-    flex-direction: column;
+#root {
+  flex-direction: column;
 }
 
-form{
-    padding: 13px 14px;
+form {
+  padding: 13px 14px;
 }
 
-.registerButton{
-    margin-top: 15px;
-    color: white;
+.registerButton {
+  margin-top: 15px;
+  color: white;
 }
-.registerButton:hover{
-    color: #00c3ff;
-
-}
-
-.registerContainer{
-    margin-top: 10px;
-    color: white;
+.registerButton:hover {
+  color: #00c3ff;
 }
 
-
-.titulo{
-    font-family: "Lato", sans-serif;
-    font-weight: 700;
-    font-style: normal;
-    font-size: 2rem;
-    margin-bottom: 15px;
+.registerContainer {
+  margin-top: 10px;
+  color: white;
 }
 
-.btn{
-    font-family: "Lato", sans-serif;
-    font-weight: 700;
-    font-style: normal;
-    font-size: 17px;
+.titulo {
+  font-family: "Lato", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 2rem;
+  margin-bottom: 15px;
 }
 
-.btn-primary{
-    background-color: rgb(145, 146, 146);
-    border: none;
+.btn {
+  font-family: "Lato", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 17px;
 }
 
-.btn-primary:hover{
-    background-color: rgb(136, 136, 136);
-    border: none;
+.btn-primary {
+  background-color: rgb(145, 146, 146);
+  border: none;
 }
 
-.btn-primary:focus{
-    background-color: rgb(136, 136, 136);
-    
+.btn-primary:hover {
+  background-color: rgb(136, 136, 136);
+  border: none;
 }
 
-.btn-primary:active{
-    background-color: rgb(136, 136, 136)!important;
-    border: none;
+.btn-primary:focus {
+  background-color: rgb(136, 136, 136);
 }
 
-.inputs{
-    border-radius: 10px;
-    text-align: center;
-    margin-bottom: 15px;
-    padding: 5px;
-    border: 1px solid #dbd5d5;
-   
+.btn-primary:active {
+  background-color: rgb(136, 136, 136) !important;
+  border: none;
+}
+
+.inputs {
+  border-radius: 10px;
+  text-align: center;
+  margin-bottom: 15px;
+  padding: 5px;
+  border: 1px solid #dbd5d5;
 }
 
 .inputs:focus {
-    border: 1px solid #dbd5d5;
-    outline: none;
+  border: 1px solid #dbd5d5;
+  outline: none;
 }
 
-.heroContainer {
-  width: 50% !important;
-  max-height: 700px !important;
-  overflow: hidden;
+.heroContainer-frame {
+  width: 100vh !important;
+  margin: 0 auto;
+  overflow: hidden; /* Impede que a imagem vaze do quadro */
   border-radius: 50px;
 }
 
-.heroContainer .carousel-item img {
-  height: 500px !important;
-  object-fit: cover; 
-}
-
-/* Parte dos Cards */
-
-.room-card-container {
-  max-width: 400px; 
-  margin: 1rem auto; 
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
-  border-radius: 8px; 
-  overflow: hidden; 
-  font-family: Arial, sans-serif;
-}
-
-.room-card-container .carousel img {
+.hero-img {
   width: 100%;
-  height: 250px; 
-  object-fit: cover;
+  height: 100%;
+  object-fit: contain; /* Aplica propriedade cover para que a imagem preencha o quadro */
+  object-position: center; /* Centraliza o recorte da imagem */
 }
 
-.room-card-container .card {
-  width: 100%;
-  border: none;
-  border-top: 1px solid #ddd;
-  border-radius: 0 0 8px 8px;
+@media (max-width: 576px) {
+  .heroContainer-frame{
+    height: 50vh;
+  }
 }
-
-
-.room-card-container .card-img-top {
-  height: 150px;
-  object-fit: cover;
-}
-
-.room-card-container .card-body {
-  padding: 1rem;
-}
-
-.room-card-container .btn-primary {
-  background-color: #007bff;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
