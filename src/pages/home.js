@@ -2,6 +2,7 @@ import Hero from "../components/hero.js";
 import Navbar from "../components/menu.js";
 import Footer from "../components/footer.js";
 import RoomCard from "../components/RoomCard.js";
+import DateSelector from "../components/DateSelector.js";
 
 export default function renderHomePage() {
 
@@ -13,13 +14,15 @@ export default function renderHomePage() {
 
     const navbar = Navbar();
     nav.appendChild(navbar);
-
-    const hero = Hero();
-    divRoot.appendChild(hero);
-
-    const cards = RoomCard();
-    divRoot.appendChild(cards);
     
+    const Selector = DateSelector();
+    divRoot.appendChild(Selector);
+
+    // const hero = Hero();
+    // divRoot.appendChild(hero);
+
+    // const cards = RoomCard();
+    // divRoot.appendChild(cards);    
 
     const fot = document.getElementById('footer');
     fot.innerHTML = '';

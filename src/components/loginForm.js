@@ -12,7 +12,6 @@ export default function LoginForm() {
     container.style.border = 'none';
     container.style.backgroundColor = 'transparent';
     container.style.backdropFilter = 'blur(10px) brightness(0.8)';
-    container.style.justifyContent = 'center';
 
     container.style.margin = '0 auto'; // Centraliza o card
 

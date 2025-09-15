@@ -61,27 +61,33 @@ form {
   border: 1px solid #dbd5d5;
 }
 
+.heroContainer-frame {
+  overflow: hidden;
+}
+
+
+/* aplica propriedade cover para recortar parte da imagem ( e nao distorcê-la ), definindo meu ponto de foco a partir da propriedade object-position */
+.heroContainer img,
+.heroContainer {
+  object-fit: cover;
+  height: 70vh;
+  object-position: center;
+}
+
 .inputs:focus {
   border: 1px solid #dbd5d5;
   outline: none;
 }
 
-.heroContainer-frame {
-  width: 100vh !important;
-  margin: 0 auto;
-  overflow: hidden; /* Impede que a imagem vaze do quadro */
-  border-radius: 50px;
-}
-
-.hero-img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain; /* Aplica propriedade cover para que a imagem preencha o quadro */
-  object-position: center; /* Centraliza o recorte da imagem */
+.DataCheck {
+  padding: 10px 10px;
+  border-radius: 10px;
+  margin: 10px;
+  text-align: center;
 }
 
 @media (max-width: 576px) {
-  .heroContainer-frame{
-    height: 50vh;
-  }
+    .heroContainer img .heroContainer {
+      height: 50vh;
+    }
 }
