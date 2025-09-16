@@ -1,6 +1,8 @@
 export default function LoginForm() {
     const DivRoot = document.getElementById('root');
     DivRoot.innerHTML = '';
+    DivRoot.style.alignItems = 'center';
+    DivRoot.style.height = '100vh'
 
     // Container principal (card)
 

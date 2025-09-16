@@ -1,5 +1,7 @@
 #root {
   flex-direction: column;
+  gap: 10vh;
+  padding-bottom: 10vh;
 }
 
 form {
@@ -92,7 +94,6 @@ form {
   justify-content: center;
   align-items: center;
   gap: 45px;
-  margin-top: 10px;
 }
 
 

@@ -1,6 +1,7 @@
 <?php
     require_once "config/database.php";
     require_once "helpers/response.php";
+    
     if ($erroDB){
         echo "Erro na conexão";
         exit;
