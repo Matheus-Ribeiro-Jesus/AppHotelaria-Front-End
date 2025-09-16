@@ -1,4 +1,4 @@
-export default function falseooter() {
+export default function Footer() {
   const footer = document.createElement("div");
   footer.innerHTML = `
     <footer class="text-center text-lg-start bg-body-tertiary text-muted">

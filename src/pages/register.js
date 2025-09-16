@@ -1,5 +1,5 @@
 import LoginForm from "../components/loginForm.js";
-import Navbar from "../components/menu.js";
+import Navbar from "../components/NavBar.js";
 import Footer from "../components/footer.js";
 
 export default function renderRegisterPage(){

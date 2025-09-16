@@ -1,5 +1,5 @@
 import LoginForm from "../components/loginForm.js";
-import Navbar from "../components/menu.js";
+import Navbar from "../components/NavBar.js";
 import Footer from "../components/footer.js";
 import { loginRequest, saveToken } from "../api/authAPI.js";
 export default function renderLoginPage() {
