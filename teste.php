@@ -17,13 +17,12 @@
     //     "senha" => PasswordController::generateHash(1722)
 
     // ];
-        
 
-    
-    $data = [ 
-        "email"=>"matheus2@gmail.com",
-        "senha"=>"123345"
+    $data = [
+        "nome" => "Queijo quente",
+        "preco" => 100,
     ];
+
     
     
     

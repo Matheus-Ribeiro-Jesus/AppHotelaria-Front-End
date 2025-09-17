@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . "/../controllers/PasswordController.php";
     class ClientModel{
         public static function create($conn, $data){
             $sql = "INSERT INTO clientes (nome, cpf, telefone, email, senha) VALUES (?, ?, ?, ?, ?)";
@@ -8,7 +9,7 @@
                 $data["cpf"],
                 $data["telefone"],
                 $data["email"],
-                $data["senha"]
+                $data["senha" ]
             );
             return $stmt->execute();
         }
