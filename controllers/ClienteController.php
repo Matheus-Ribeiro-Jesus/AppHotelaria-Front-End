@@ -3,6 +3,8 @@
 
     class ClienteController{
         public static function create($conn, $data){
+            $data['senha'] = PasswordController::generateHash($data['senha']);
+            
             $result = ClientModel::create($conn, $data);
             if($result){
                 return jsonResponse(['message'=> 'Cliente criado com sucesso']);
