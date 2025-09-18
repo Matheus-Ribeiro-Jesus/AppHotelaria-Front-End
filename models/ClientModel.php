@@ -9,7 +9,7 @@ require_once __DIR__ . "/../controllers/PasswordController.php";
                 $data["cpf"],
                 $data["telefone"],
                 $data["email"],
-                $data["senha" ]
+                $data["senha"]
             );
             return $stmt->execute();
         }

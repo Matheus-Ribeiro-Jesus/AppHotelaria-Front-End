@@ -7,6 +7,8 @@
     require_once __DIR__ . '/models/QuartosModel.php';
     require_once __DIR__ . '/controllers/QuartosController.php';
     require_once __DIR__ . '/controllers/ClienteController.php';
+    require_once __DIR__ . '/controllers/AdicionalController.php';
+
 
     
     // $data = [
@@ -22,6 +24,7 @@
         "nome" => "Queijo quente",
         "preco" => 100,
     ];
+
 
     
     

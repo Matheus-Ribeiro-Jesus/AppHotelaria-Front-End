@@ -1,7 +1,8 @@
 <?php
-class AdicionalModel{
+class AdicionalModel
+{
     public static function create($conn, $data){
-        $sql = "INSERT INTO Adicional(nome, preco) VALUES(?,?)";
+        $sql = "INSERT INTO adicionais (nome, preco) VALUES(?,?)";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param(
             "sd",
@@ -14,7 +15,7 @@ class AdicionalModel{
         $sql = "SELECT * from adicionais";
         $stmt = $conn->prepare($sql);
         $result = $conn->query($sql);
-        return $result->fetch_assoc(MYSQL_ASSOC);
+        return $result->fetch_all(MYSQLI_ASSOC);
     }
     public static function getById($conn, $id){
         $sql = "SELECT * FROM adicionais WHERE id = ?";
@@ -23,6 +24,25 @@ class AdicionalModel{
         $stmt->execute();
         return $stmt->get_result()->fetch_all();
     }
+
+    public static function delete($conn, $id){
+        $sql = "DELETE FROM adicionais WHERE id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("i", $id);
+        return $stmt->execute();
+    }
+
+    public static function update($conn, $id, $data){
+        $sql = "UPDATE adicionais SET nome = ?, preco = ? WHERE id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("sdi",
+        $data["nome"],
+        $data["preco"],
+        $id
+    );
+        return $stmt->execute();
+    }
+
 
 }
 ?>
