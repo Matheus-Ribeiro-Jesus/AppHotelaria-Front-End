@@ -96,6 +96,14 @@ form {
   gap: 45px;
 }
 
+.divDate{
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+
+
+}
+
 
 /* Responsividade Media Query */
 

@@ -15,22 +15,25 @@ export default function renderHomePage() {
     const navbar = Navbar();
     nav.appendChild(navbar);
     
-    // const Selector = DateSelector();
-    // divRoot.appendChild(Selector);
-
+    
     const hero = Hero();
     divRoot.appendChild(hero);
+    
+    
 
+    const datePesquisar = DateSelector;
+    divRoot.appendChild(datePesquisar);
+    
     //Criando um grupo para incorporar cada div de cada card, para aplicar display-flex
-
     const divCards = document.createElement('div');
     divCards.innerHTML = '';
     divCards.className = "cards";
 
-    for(var i = 0; i < 3 ; i++){
-        const cards = RoomCard();
-        divCards.appendChild(cards);
+    for (var i = 0; i < 3; i++) {
+        const card = RoomCard(i); 
+        divCards.appendChild(card);
     }
+
 
     divRoot.appendChild(divCards);
 

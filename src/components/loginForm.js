@@ -45,7 +45,7 @@ export default function LoginForm() {
     const email = document.createElement('input');
     email.type = 'email';
     email.placeholder = "Digite seu email";
-    email.className = 'form-control mb-3';
+    email.className = 'inputs';
     email.style.textAlign = 'center';
     formulario.appendChild(email);
 
@@ -53,7 +53,7 @@ export default function LoginForm() {
     const senha = document.createElement('input');
     senha.type = 'password';
     senha.placeholder = "Digite sua senha";
-    senha.className = 'form-control mb-3';
+    senha.className = 'inputs';
     senha.style.textAlign = 'center';
     formulario.appendChild(senha);
 
