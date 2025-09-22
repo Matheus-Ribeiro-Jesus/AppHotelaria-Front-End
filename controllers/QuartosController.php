@@ -15,7 +15,7 @@
             }
 
             if (!empty($erros)) {
-                return jsonResponse(['message'=> 'Erro, falta o comando : ' . implode(',', $erros)], 404);
+                return jsonResponse(['message'=> 'Erro, falta o comando: ' . implode(',', $erros)], 404);
             }
 
 

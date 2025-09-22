@@ -6,11 +6,11 @@ export default function barraCategoria() {
     divPrincipal.style.backgroundColor = '#3c5ec2ff'; 
     divPrincipal.style.padding = '20px 30px';
     divPrincipal.style.display = 'flex';
-    divPrincipal.style.marginLeft = '10px';
+    divPrincipal.style.marginLeft = '100px';
     divPrincipal.style.marginTop = '10px';
     divPrincipal.style.justifyContent = 'space-between';
     divPrincipal.style.alignItems = 'center';
-    divPrincipal.style.width = '85%';
+    divPrincipal.style.width = '65%';
     divPrincipal.style.borderRadius = '20px';
     divPrincipal.style.fontFamily = 'Arial, sans-serif';
     divPrincipal.style.boxShadow = '0 4px 8px rgba(0,0,0,0.1)';
