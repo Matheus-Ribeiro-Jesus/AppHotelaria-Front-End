@@ -18,13 +18,11 @@ export default function renderHomePage() {
     
     const hero = Hero();
     divRoot.appendChild(hero);
-    
-    
 
-    const datePesquisar = DateSelector;
+
+    const datePesquisar = DateSelector();
     divRoot.appendChild(datePesquisar);
     
-    //Criando um grupo para incorporar cada div de cada card, para aplicar display-flex
     const divCards = document.createElement('div');
     divCards.innerHTML = '';
     divCards.className = "cards";

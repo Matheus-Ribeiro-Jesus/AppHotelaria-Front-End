@@ -1,7 +1,7 @@
 #root {
   flex-direction: column;
   gap: 10vh;
-  padding-bottom: 10vh;
+  padding-bottom: 10vh; 
 }
 
 form {
