@@ -1,10 +1,12 @@
 <?php
-class QuartosModel{
+class QuartosModel
+{
     public static function create($conn, $data)
     {
         $sql = "INSERT INTO quartos (nome, numero, qtd_cama_casaL, qtd_cama_solteiro, preco, disponivel) VALUES (?, ?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("siiidi",
+        $stmt->bind_param(
+            "siiidi",
             $data["nome"],
             $data["numero"],
             $data["qtd_cama_casal"],
@@ -16,13 +18,15 @@ class QuartosModel{
         return $stmt->execute();
     }
 
-    public static function listarTodos($conn){
+    public static function listarTodos($conn)
+    {
         $sql = "SELECT * FROM quartos";
         $result = $conn->query($sql);
         return $result->fetch_all(MYSQLI_ASSOC);
 
     }
-    public static function getByid($conn, $id){
+    public static function getByid($conn, $id)
+    {
         $sql = "SELECT * FROM quartos WHERE id = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("i", $id);
@@ -30,17 +34,20 @@ class QuartosModel{
         return $stmt->get_result()->fetch_assoc();
     }
 
-    public static function delete($conn, $id){
+    public static function delete($conn, $id)
+    {
         $sql = "DELETE FROM quartos WHERE id = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("i", $id);
         return $stmt->execute();
     }
 
-    public static function update($conn, $id, $data){
+    public static function update($conn, $id, $data)
+    {
         $sql = "UPDATE quartos SET nome = ?, numero = ?, qtd_cama_casal = ?, qtd_cama_solteiro = ?, preco = ?, disponivel = ? WHERE id = ?";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("siiidii",
+        $stmt->bind_param(
+            "siiidii",
             $data["nome"],
             $data["numero"],
             $data["qtd_cama_casal"],
@@ -52,6 +59,28 @@ class QuartosModel{
         return $stmt->execute();
     }
 
+    public static function pesquisarDisponivel($conn, $data)
+    {
+        $sql = "
+        SELECT q.*
+        FROM quartos q
+        WHERE q.disponivel = 1
+          AND q.id NOT IN (
+              SELECT r.quarto_id
+              FROM reservas r
+              WHERE (? < r.fim) 
+                AND (? > r.inicio)
+          )
+    ";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([
+            $data['checkin'],
+            $data['checkout'],
+        ]);
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 
 }
 ?>

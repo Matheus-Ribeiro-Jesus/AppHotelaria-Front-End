@@ -53,6 +53,26 @@
             return jsonResponse(['message'=> 'Falha ao atualizar o quarto'], 400);
         }
     }
+    public static function pesquisarDisponivel($conn, $data){
+        $result = QuartosModel::pesquisarDisponivel($conn, $data);
+        $pessoas = $data['pessoas'] ?? null;
+        
+        if($result && count($result) > 0) {
+            $quartosFiltrados = array_filter($result, function($quarto) use ($pessoas) {
+                $capacidade = ($quarto['qtd_cama_casal'] * 2) + $quarto['qtd_cama_solteiro'];
+                $quarto['capacidade'] = $capacidade;
+                return $pessoas ? $capacidade >= $pessoas : true;
+            });
+            
+            return jsonResponse(['status'=>'sucesso', 'message'=>'Quartos Disponiveis encontrados', 'data'=> array_values($quartosFiltrados)], 200);
+        }else {
+            return jsonResponse([
+                'message' => 'Nenhum quarto disponível para este período',
+                'data'    => []
+            ], 404);
+        }
+    }
+
     
 }
 ?>

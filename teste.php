@@ -13,6 +13,8 @@
         "nome" => "Queijo quente",
         "preco" => 100,
     ];
+    
 
+    // http://localhost/estudo_php/quartos.php?disponiveis=1&checkin=2025-09-24%2014:00:00&checkout=2025-09-26%2012:00:00&pessoa
 
 ?>

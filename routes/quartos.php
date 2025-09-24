@@ -2,13 +2,32 @@
 require_once __DIR__ . "/../controllers/QuartosController.php";
 
 if ($_SERVER['REQUEST_METHOD'] === "GET") {
-    $data = json_decode(file_get_contents('php://input'), true);
-    $id = $data["id"] ?? null;
+    // se vier rota /quartos/disponiveis
+    if (isset($_GET['disponiveis'])) {
+        $checkin = $_GET['checkin'] ?? null;
+        $checkout = $_GET['checkout'] ?? null;
 
-    if (isset($id)) {
-        QuartosController::getBydId($conn, $id);
+        if ($checkin && $checkout) {
+            QuartosController::pesquisarDisponivel($conn, [
+                'checkin' => $checkin,
+                'checkout' => $checkout
+            ]);
+        } else {
+            jsonResponse([
+                'status' => 'erro',
+                'message' => 'É necessário informar checkin e checkout'
+            ], 400);
+        }
+
     } else {
-        QuartosController::getAll($conn);
+        // rota padrão /quartos ou /quartos?id=...
+        $id = $_GET["id"] ?? null;
+
+        if ($id) {
+            QuartosController::getBydId($conn, $id);
+        } else {
+            QuartosController::getAll($conn);
+        }
     }
 
 }elseif($_SERVER['REQUEST_METHOD'] === "PUT") {
