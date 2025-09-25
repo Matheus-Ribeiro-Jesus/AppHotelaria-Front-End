@@ -62,14 +62,14 @@ class QuartosModel
     public static function pesquisarDisponivel($conn, $data)
     {
         $sql = "
-        SELECT q.*
-        FROM quartos q
-        WHERE q.disponivel = 1
-          AND q.id NOT IN (
-              SELECT r.quarto_id
-              FROM reservas r
-              WHERE (? < r.fim) 
-                AND (? > r.inicio)
+            SELECT q.*
+            FROM quartos q
+            WHERE q.disponivel = 1
+              AND q.id NOT IN (
+                  SELECT r.quarto_id
+                  FROM reservas r
+                WHERE (? < r.fim) 
+                    AND (? > r.inicio)
           )
     ";
 
