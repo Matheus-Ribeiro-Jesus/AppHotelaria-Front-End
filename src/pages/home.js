@@ -22,7 +22,7 @@ export default function renderHomePage() {
 
     const datePesquisar = DateSelector();
     divRoot.appendChild(datePesquisar);
-    
+
     const divCards = document.createElement('div');
     divCards.innerHTML = '';
     divCards.className = "cards";

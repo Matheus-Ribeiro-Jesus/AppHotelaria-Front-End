@@ -14,14 +14,14 @@ switch ($method) {
             $capacidade = isset($_GET['pessoas']) ? $_GET['pessoas'] : null;
             jsonResponse(['message'=>[$inicio, $fim, $capacidade]], 200);
         }
-        elseif ($id = $seguimentos[2] ?? null) {
+        elseif ($param) {
             QuartosController::getBydId($conn, $id);
         }else{
             QuartosController::getAll($conn);
         }
 
-       
-       
+
+
         break;
 
     case "DELETE":

@@ -100,10 +100,18 @@ form {
   display: flex;
   justify-content: center;
   gap: 15px;
+}
 
+.btnReserva{
+  background-color: rgb(49, 87, 202) !important;
+  transition: all 0.1s ease;
 
 }
 
+.btnReserva:hover{
+  transform: scale(1.1);
+  background-color: rgb(24, 64, 182) !important;
+}
 
 /* Responsividade Media Query */
 

@@ -15,6 +15,6 @@
     ];
     
 
-    // http://localhost/estudo_php/quartos.php?disponiveis=1&checkin=2025-09-24%2014:00:00&checkout=2025-09-26%2012:00:00&pessoas
+    // http://localhost/estudo_php/api/quartos/disponiveis?checkin=2025-09-28&checkout=2025-10-02&pessoas=3
 
 ?>
