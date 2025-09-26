@@ -60,46 +60,12 @@ class QuartosController
         }
     }
 
-    public static function pesquisarDisponivel($conn, $data)
-    {
-        $result = QuartosModel::pesquisarDisponivel($conn, $data);
-        $pessoas = $data['pessoas'] ?? null;
-
-        if ($result && count($result) > 0) {
-            $quartosFiltrados = [];
-
-            foreach ($result as $quarto) {
-                $capacidade = ($quarto['qtd_cama_casal'] * 2) + $quarto['qtd_cama_solteiro'];
-                $quarto['capacidade'] = $capacidade;
-
-                // Se tiver filtro de pessoas, só adiciona se couber
-                if ($pessoas) {
-                    if ($capacidade >= $pessoas) {
-                        $quartosFiltrados[] = $quarto;
-                    }
-                } else {
-                    // Se não tiver filtro, adiciona todos
-                    $quartosFiltrados[] = $quarto;
-                }
-            }
-
-            if (count($quartosFiltrados) > 0) {
-                return jsonResponse([
-                    'status' => 'sucesso',
-                    'message' => 'Quartos Disponíveis encontrados',
-                    'data' => array_values($quartosFiltrados)
-                ], 200);
-            } else {
-                return jsonResponse([
-                    'message' => 'Nenhum quarto comporta a quantidade de pessoas informada',
-                    'data' => []
-                ], 404);
-            }
+       public static function buscarDisponivel($conn,$data) {
+        $resultado = QuartosModel::buscarDisponiveis($conn,$data);
+        if ($resultado !== false && !empty($resultado)) {
+            return jsonResponse(['mesage'=>"quartos Disponiveis", 'data'=> $resultado]);
         } else {
-            return jsonResponse([
-                'message' => 'Nenhum quarto disponível para este período',
-                'data' => []
-            ], 404);
+            return jsonResponse(['mesage'=>"erro ao buscar quartos disponiveis"],400);
         }
     }
 

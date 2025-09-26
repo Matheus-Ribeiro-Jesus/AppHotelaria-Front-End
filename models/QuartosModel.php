@@ -59,27 +59,29 @@ class QuartosModel
         return $stmt->execute();
     }
 
-    public static function pesquisarDisponivel($conn, $data)
-    {
-        $sql = "
-            SELECT q.*
-            FROM quartos q
-            WHERE q.disponivel = 1
-              AND q.id NOT IN (
-                  SELECT r.quarto_id
-                  FROM reservas r
-                WHERE (? < r.fim) 
-                    AND (? > r.inicio)
-          )
-    ";
+    public static function buscarDisponiveis($conn,$data) {
+        $sql = "SELECT q.id, q.nome, q.qnt_cama_casal, q.qnt_cama_solteiro, q.preco, q.disponivel
+        FROM quartos q
+        WHERE q.id NOT IN (
+        SELECT
+        r.quarto_id
+        FROM
+        reservas r
+        WHERE
+        (r.fim >= ? AND r.inicio <= ?)
+        )
+        AND q.disponivel = true
+        AND ((q.qtd_cama_casal * 2) + q.qtd_cama_solteiro) >= ?;";
 
         $stmt = $conn->prepare($sql);
-        $stmt->execute([
-            $data['checkin'],
-            $data['checkout'],
-        ]);
 
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $inicio = $data['inicio'];
+        $fim = $data['fim'];
+        $capacidade = $data['capacidade'] ?? 1;
+
+        $stmt->bind_param("ssi", $fim, $inicio, $capacidade);
+        return $stmt->execute();
+
     }
 
 }
