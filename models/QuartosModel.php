@@ -3,7 +3,7 @@ class QuartosModel
 {
     public static function create($conn, $data)
     {
-        $sql = "INSERT INTO quartos (nome, numero, qtd_cama_casaL, qtd_cama_solteiro, preco, disponivel) VALUES (?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO quartos (nome, numero, qtd_cama_casal, qtd_cama_solteiro, preco, disponivel) VALUES (?, ?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param(
             "siiidi",
@@ -13,7 +13,6 @@ class QuartosModel
             $data["qtd_cama_solteiro"],
             $data["preco"],
             $data["disponivel"]
-
         );
         return $stmt->execute();
     }
@@ -23,9 +22,9 @@ class QuartosModel
         $sql = "SELECT * FROM quartos";
         $result = $conn->query($sql);
         return $result->fetch_all(MYSQLI_ASSOC);
-
     }
-    public static function getByid($conn, $id)
+
+    public static function getById($conn, $id)
     {
         $sql = "SELECT * FROM quartos WHERE id = ?";
         $stmt = $conn->prepare($sql);
@@ -59,30 +58,21 @@ class QuartosModel
         return $stmt->execute();
     }
 
-    public static function buscarDisponiveis($conn,$data) {
-        $sql = "SELECT q.id, q.nome, q.qnt_cama_casal, q.qnt_cama_solteiro, q.preco, q.disponivel
+    public static function get_available($conn, $data)
+    {
+        $sql = "SELECT q.*
         FROM quartos q
-        WHERE q.id NOT IN (
-        SELECT
-        r.quarto_id
-        FROM
-        reservas r
-        WHERE
-        (r.fim >= ? AND r.inicio <= ?)
-        )
-        AND q.disponivel = true
-        AND ((q.qtd_cama_casal * 2) + q.qtd_cama_solteiro) >= ?;";
+        WHERE q.disponivel = 1 AND (q.qtd_cama_casal * 2 + q.qtd_cama_solteiro) >= ? AND NOT EXISTS ( SELECT 1 FROM reservas r WHERE r.quarto_id = q.id AND r.inicio < ? AND r.fim > ?)";
 
         $stmt = $conn->prepare($sql);
-
-        $inicio = $data['inicio'];
-        $fim = $data['fim'];
-        $capacidade = $data['capacidade'] ?? 1;
-
-        $stmt->bind_param("ssi", $fim, $inicio, $capacidade);
-        return $stmt->execute();
-
+        $stmt->bind_param(
+            "iss",
+            $data["qtd"],
+            $data["inicio"],
+            $data["fim"]
+        );
+        $stmt->execute();
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
-
 }
 ?>

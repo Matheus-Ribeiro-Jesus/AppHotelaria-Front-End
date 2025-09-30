@@ -2,8 +2,7 @@
 require_once __DIR__ . "/../models/QuartosModel.php";
 
 
-class QuartosController
-{
+class QuartosController{
     public static function create($conn, $data)
     {
 
@@ -60,12 +59,12 @@ class QuartosController
         }
     }
 
-       public static function buscarDisponivel($conn,$data) {
-        $resultado = QuartosModel::buscarDisponiveis($conn,$data);
-        if ($resultado !== false && !empty($resultado)) {
-            return jsonResponse(['mesage'=>"quartos Disponiveis", 'data'=> $resultado]);
-        } else {
-            return jsonResponse(['mesage'=>"erro ao buscar quartos disponiveis"],400);
+    public static function get_available($conn, $data){
+        $result = QuartosModel::get_available($conn, $data);
+        if($result){
+            return jsonResponse(['Quartos'=> $result]);
+        }else{
+            return jsonResponse(['message'=> 'Deu erro'], 400);
         }
     }
 

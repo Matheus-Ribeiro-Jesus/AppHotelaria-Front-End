@@ -19,7 +19,7 @@ class AuthController
                     "message" => "Preencha todos os campos"
 
                 ],
-                401
+                400
             );
         }
 

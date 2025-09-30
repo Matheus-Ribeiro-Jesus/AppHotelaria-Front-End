@@ -3,7 +3,7 @@ class ReservaModel{
     public static function create($conn, $data) {
         $sql = "INSERT INTO reservas (pedido_id, quarto_id, adicional_id, inicio, fim) VALUES (?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("iiiii",
+        $stmt->bind_param("iiiss",
             $data["pedido_id"],
             $data["quarto_id"],
             $data["adicional_id"],

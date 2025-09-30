@@ -10,7 +10,7 @@ export default function LoginForm() {
     container.className = 'card p-4 shadow-lg d-flex flex-row'; 
     container.style.width = '100%';
     container.style.maxWidth = '900px'; 
-    container.style.height = '430px';
+    container.style.height = '500px';
     container.style.border = 'none';
     container.style.backgroundColor = 'transparent';
     container.style.backdropFilter = 'blur(10px) brightness(0.8)';

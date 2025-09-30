@@ -1,4 +1,4 @@
-    import Hero from "../components/hero.js";
+import Hero from "../components/hero.js";
 import Navbar from "../components/NavBar.js";
 import Footer from "../components/footer.js";
 import RoomCard from "../components/RoomCard.js";
