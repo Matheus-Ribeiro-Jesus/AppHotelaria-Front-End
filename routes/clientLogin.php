@@ -1,9 +1,9 @@
 <?php
-    require_once __DIR__ . "./../controllers/ClienteController.php";
+    require_once __DIR__ . "./../controllers/AuthController.php";
 
     if ($_SERVER['REQUEST_METHOD'] === "POST") {
         $data = json_decode(file_get_contents('php://input'), true);
-        ClienteController::loginClient($conn, $data);
+        AuthController::loginClient($conn, $data);
     } else {
         jsonResponse([
             'status' => 'erro',

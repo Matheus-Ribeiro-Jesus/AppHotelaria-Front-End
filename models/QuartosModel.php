@@ -68,8 +68,8 @@ class QuartosModel
         $stmt->bind_param(
             "iss",
             $data["qtd"],
+            $data["fim"],
             $data["inicio"],
-            $data["fim"]
         );
         $stmt->execute();
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);

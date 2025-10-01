@@ -25,7 +25,7 @@
         if(in_array($subRoute, ["login", "quartos", "cliente", "adicional", "reserva", "pedido", "disponiveis", "clientLogin"])){
             require "routes/${subRoute}.php";
         }else{
-            return jsonResponse(['message' => 'rota não encontrada'], 404);
+            return jsonResponse(['message' => 'rota não encontrada'], 400);
         }
         exit;
     }else{

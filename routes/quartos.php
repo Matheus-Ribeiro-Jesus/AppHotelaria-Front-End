@@ -8,10 +8,12 @@ if ( $_SERVER['REQUEST_METHOD'] === "GET" ){
         if (is_numeric($id)){
             QuartosController::getBydId($conn, $id);
         }else{
-            $inicio = isset($_GET['inicio']) ? $_GET['inicio'] : null;
-            $fim = isset($_GET['fim']) ? $_GET['fim'] : null;
-            $qtd = isset($_GET['qtd']) ? $_GET['qtd'] : null;
-            QuartosController::get_available($conn, ["inicio"=>$inicio, "fim"=>$fim, "qtd"=>$qtd]);
+            $data = [
+                "data_inicio"=>isset($_GET['inicio']) ? $_GET['inicio'] : null,
+                "data_fim"=>isset($_GET['fim']) ? $_GET['fim'] : null,
+                "qtd"=>isset($_GET['qtd']) ? $_GET['qtd'] : null
+            ];
+            QuartosController::get_available($conn, $data);
         }
     }else{
         QuartosController::getAll($conn);
@@ -39,7 +41,6 @@ elseif ( $_SERVER['REQUEST_METHOD'] === "DELETE" ){
         jsonResponse(['message'=>"ID do quarto é obrigatório"], 400);
     }
 }
-
 
 else{
     jsonResponse([

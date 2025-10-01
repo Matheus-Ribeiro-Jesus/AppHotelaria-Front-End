@@ -1,30 +1,25 @@
 <?php
 require_once __DIR__ . "/../models/QuartosModel.php";
-
+require_once __DIR__ . "/ValidadorController.php";
 
 class QuartosController{
-    public static function create($conn, $data)
-    {
+    public static $labels = ["nome", "numero", "qtd_casal", "qtd_solteiro", "preco", "disponivel"];
 
-        $camposObrigatorios = ["nome", "numero", "qtd_cama_casal", "qtd_cama_solteiro", "preco", "disponivel"];
-        $erros = [];
+    public static function create($conn, $data){
 
-        foreach ($camposObrigatorios as $campo) {
-            if (!isset($data[$campo]) || empty($data[$campo])) {
-                $erros[] = $campo;
-            }
-        }
+        $validar = ValidatorController::validate_data($data, self::$labels);
 
-        if (!empty($erros)) {
-            return jsonResponse(['message' => 'Erro, falta o comando: ' . implode(',', $erros)], 404);
+        if( !empty($validar) ){
+            $dados = implode(", ", $validar);
+            return jsonResponse(['message'=> "Erro, Falta o campo: ".$dados], 400);
         }
 
 
         $result = QuartosModel::create($conn, $data);
-        if ($result) {
-            return jsonResponse(['message' => 'Quarto criado com sucesso']);
-        } else {
-            return jsonResponse(['message' => 'Deu merda'], 400);
+        if ($result){
+            return jsonResponse(['message'=>"Quarto criado com sucesso"]);
+        }else{
+            return jsonResponse(['message'=>"Erro ao criar o quarto"], 400);
         }
     }
     public static function getAll($conn)
