@@ -23,7 +23,6 @@ require_once __DIR__ . "/../controllers/PasswordController.php";
         public static function validateUserLogin($conn, $email, $password){
         $sql = "SELECT c.id, c.email, c.senha, c.nome, roles.nome FROM clientes AS c
         JOIN roles ON roles.id = c.cargo_id WHERE c.email = ?;";
-        
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("s", $email);
         $stmt->execute();

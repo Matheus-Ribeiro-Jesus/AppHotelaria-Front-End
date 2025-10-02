@@ -6,16 +6,23 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     $data = json_decode(file_get_contents('php://input'), true);
 
     if($opcao == "cliente"){
+
         AuthController::loginClient($conn, $data);
+
     }elseif($opcao == "funcionario"){
         AuthController::login($conn, $data);
     }else{
         jsonResponse(['status'=>'erro', 'message'=>'rota nao encontrada']);
     }
 
-
     AuthController::login($conn, $data);
-} else {
+} 
+elseif($_SERVER['REQUEST_METHOD'] === "PUT"){
+    validateTokenAPI();
+    jsonResponse(['message'=>'Resposta'], 200);
+}
+
+else {
     jsonResponse([
         'status' => 'erro',
         'message' => 'Método não permitido'

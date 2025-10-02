@@ -60,16 +60,21 @@ class QuartosModel
 
     public static function get_available($conn, $data)
     {
-        $sql = "SELECT q.*
+        $sql = "SELECT *
         FROM quartos q
-        WHERE q.disponivel = 1 AND (q.qtd_cama_casal * 2 + q.qtd_cama_solteiro) >= ? AND NOT EXISTS ( SELECT 1 FROM reservas r WHERE r.quarto_id = q.id AND r.inicio < ? AND r.fim > ?)";
+        WHERE q.disponivel = true
+        AND ((q.qtd_cama_casal * 2) + q.qtd_cama_solteiro) >= ?
+        AND q.id NOT IN (
+        SELECT r.quarto_id
+        FROM reservas r 
+        WHERE (r.fim >= ? AND r.inicio <= ?))";
 
         $stmt = $conn->prepare($sql);
         $stmt->bind_param(
             "iss",
             $data["qtd"],
-            $data["fim"],
             $data["inicio"],
+            $data["fim"]
         );
         $stmt->execute();
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);

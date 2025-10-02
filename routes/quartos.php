@@ -2,21 +2,26 @@
 require_once __DIR__ . "/../controllers/QuartosController.php";
 
 if ( $_SERVER['REQUEST_METHOD'] === "GET" ){
-    $id = $segments[2] ?? null;
+    $id = $seguimentos[2] ?? null;
 
     if (isset($id)){
         if (is_numeric($id)){
             QuartosController::getBydId($conn, $id);
-        }else{
+        }elseif($id === "disponiveis"){
             $data = [
-                "data_inicio"=>isset($_GET['inicio']) ? $_GET['inicio'] : null,
-                "data_fim"=>isset($_GET['fim']) ? $_GET['fim'] : null,
-                "qtd"=>isset($_GET['qtd']) ? $_GET['qtd'] : null
-            ];
+                "inicio" => isset($_GET['inicio']) ? $_GET['inicio'] : null,
+                "fim" => isset($_GET['fim']) ? $_GET['fim'] : null,
+                "qtd" => isset($_GET['qtd']) ? $_GET['qtd'] : null];
+
             QuartosController::get_available($conn, $data);
         }
+        else{
+            jsonResponse(['message'=>'Essa Rota não existe'], 400);
+        }
     }else{
-        QuartosController::getAll($conn);
+            jsonResponse(['message'=>'getall'], 400);
+        
+        // QuartosController::getAll($conn);
     }
 }
 

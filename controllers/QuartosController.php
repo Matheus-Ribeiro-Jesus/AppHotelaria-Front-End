@@ -3,17 +3,9 @@ require_once __DIR__ . "/../models/QuartosModel.php";
 require_once __DIR__ . "/ValidadorController.php";
 
 class QuartosController{
-    public static $labels = ["nome", "numero", "qtd_casal", "qtd_solteiro", "preco", "disponivel"];
 
     public static function create($conn, $data){
-
-        $validar = ValidatorController::validate_data($data, self::$labels);
-
-        if( !empty($validar) ){
-            $dados = implode(", ", $validar);
-            return jsonResponse(['message'=> "Erro, Falta o campo: ".$dados], 400);
-        }
-
+        ValidatorController::validate_data($data, ["nome", "numero", "qtd_casal", "qtd_solteiro", "preco", "disponivel"]);
 
         $result = QuartosModel::create($conn, $data);
         if ($result){
@@ -34,8 +26,7 @@ class QuartosController{
         return jsonResponse($listarporId);
     }
 
-    public static function delete($conn, $id)
-    {
+    public static function delete($conn, $id){
         $result = QuartosModel::delete($conn, $id);
         if ($result) {
             return jsonResponse(['message' => 'Quarto deletado com sucesso']);
@@ -44,8 +35,8 @@ class QuartosController{
         }
     }
 
-    public static function update($conn, $id, $data)
-    {
+    public static function update($conn, $id, $data){
+        ValidatorController::validate_data($data, ["nome", "numero", "qtd_casal", "qtd_solteiro", "preco", "disponivel"]);
         $result = QuartosModel::update($conn, $id, $data);
         if ($result) {
             return jsonResponse(['message' => 'Quarto atualizado com sucesso']);
@@ -55,6 +46,11 @@ class QuartosController{
     }
 
     public static function get_available($conn, $data){
+        ValidatorController::validate_data($data, ["inicio", "fim", "qtd"]);
+        
+        $data["inicio"] = ValidatorController::fix_hours($data["inicio"], 14);
+        $data["fim"] = ValidatorController::fix_hours($data["fim"], 12);
+
         $result = QuartosModel::get_available($conn, $data);
         if($result){
             return jsonResponse(['Quartos'=> $result]);

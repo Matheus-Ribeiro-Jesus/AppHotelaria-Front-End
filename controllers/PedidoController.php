@@ -3,6 +3,7 @@
 
     class PedidosController{
         public static function create($conn, $data){
+            ValidatorController::validate_data($data, ["usuario_id", "cliente_id", "pagamento"]);
             $result = PedidosModel::create($conn, $data);
             if($result){
                 return jsonResponse(['message'=> 'Pedido criado com sucesso']);

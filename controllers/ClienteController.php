@@ -6,10 +6,10 @@ require_once "PasswordController.php";
 
 class ClienteController{
     public static function create($conn, $data){
+        ValidatorController::validate_data($data, ["email, senha", "cpf", "telefone"]);
         $login = [
             "email" => $data['email'],
-            "senha" => $data['senha']
-        ];
+            "senha" => $data['senha']];
 
         $data['senha'] = PasswordController::generateHash($data['senha']);
         $result = ClientModel::create($conn, $data);
@@ -43,7 +43,7 @@ class ClienteController{
         }
     }
     public static function update($conn, $id, $data)
-    {
+{
         $result = ClientModel::update($conn, $id, $data);
         if ($result) {
             return jsonResponse(['message' => 'Cliente atualizado com sucesso']);
