@@ -3,6 +3,7 @@ import Navbar from "../components/NavBar.js";
 import Footer from "../components/footer.js";
 import RoomCard from "../components/RoomCard.js";
 import DateSelector from "../components/DateSelector.js";
+import { listAvaibleQuartosRequest } from "../api/roomsAPI.js";
 
 export default function renderHomePage() {
 
@@ -22,6 +23,23 @@ export default function renderHomePage() {
 
     const datePesquisar = DateSelector();
     divRoot.appendChild(datePesquisar);
+
+    const btnSearchRoom = datePesquisar.querySelector('button');
+
+    btnSearchRoom.addEventListener("click", async (evento) =>{
+        evento.preventDefault();
+        const inicio = "2025-10-05";
+        const fim = "2025-12-30";
+        const qtd = 2;
+        try{
+            const quartos = await listAvaibleQuartosRequest({inicio, fim, qtd});
+            //Após intervalo: prencher as infos dos quartos nos cards ou avisar ao cliente que nao há quarto disponivel
+        }catch(erro){
+            console.log(erro);
+        }
+
+    });
+
 
     const divCards = document.createElement('div');
     divCards.innerHTML = '';
