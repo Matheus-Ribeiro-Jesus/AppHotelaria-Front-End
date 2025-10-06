@@ -16,10 +16,10 @@ export default function DateSelector(){
     guestAmount.innerHTML = 
     `
         <option value="">Quantas Pessoas?</option>
-        <option value="1">Pessoas</option>
-        <option value="2">Pessoas</option>
-        <option value="3">Pessoas</option>
-        <option value="4">Pessoas</option>
+        <option value="1">1 Pessoas</option>
+        <option value="2">2 Pessoas</option>
+        <option value="3">3 Pessoas</option>
+        <option value="4">4 Pessoas</option>
         <option value="5">5 ou mais Pessoas</option>`;
 
     const btnSearchRoom = document.createElement('button');

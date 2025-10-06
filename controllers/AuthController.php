@@ -2,13 +2,13 @@
 
 require_once __DIR__ . "/../models/UserModel.php";
 require_once __DIR__ . "/../helpers/token_jwt.php";
-require_once "PasswordController.php";
+require_once __DIR__ . "/../controllers/PasswordController.php";
 require_once __DIR__ . "/../models/ClientModel.php";
-require_once __DIR__ . "/ValidadorController.php";
+require_once __DIR__ . "/../controllers/ValidadorController.php";
 
 class AuthController{
     public static function login($conn, $data){
-        ValidatorController::validate_data($data, ["email, senha"]);
+        ValidatorController::validate_data($data, ["email", "senha"]);
 
         $data['email'] = trim($data['email']);
         $data['senha'] = trim($data['senha']);
@@ -22,7 +22,7 @@ class AuthController{
                     "message" => "Preencha todos os campos"
 
                 ],
-                400
+                403
             );
         }
 
@@ -44,6 +44,10 @@ class AuthController{
 
     public static function loginClient($conn, $data){
         ValidatorController::validate_data($data, ["email, senha"]);
+
+
+        $data['email'] = trim($data['email']);
+        $data['senha'] = trim($data['senha']);
 
         if (empty($data['email']) || empty($data['senha'])) {
             return jsonResponse(

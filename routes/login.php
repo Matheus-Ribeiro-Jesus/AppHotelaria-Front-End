@@ -17,10 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
     AuthController::login($conn, $data);
 } 
-elseif($_SERVER['REQUEST_METHOD'] === "PUT"){
-    validateTokenAPI();
-    jsonResponse(['message'=>'Resposta'], 200);
-}
+
 
 else {
     jsonResponse([

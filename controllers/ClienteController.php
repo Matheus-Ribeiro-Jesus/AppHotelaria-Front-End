@@ -6,7 +6,7 @@ require_once "PasswordController.php";
 
 class ClienteController{
     public static function create($conn, $data){
-        ValidatorController::validate_data($data, ["email, senha", "cpf", "telefone"]);
+        ValidatorController::validate_data($data, ["email", "senha", "cpf", "telefone"]);
         $login = [
             "email" => $data['email'],
             "senha" => $data['senha']];
