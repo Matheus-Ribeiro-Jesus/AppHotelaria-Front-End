@@ -27,6 +27,20 @@ export default function renderHomePage() {
 
     const btnSearchRoom = datePesquisar.querySelector('button');
 
+    const divCards = document.createElement('div');
+    divCards.innerHTML = '';
+    divCards.className = "cards";
+    divCards.id = "cards-result";
+
+
+
+
+
+
+
+
+    
+
     btnSearchRoom.addEventListener("click", async (evento) =>{
         evento.preventDefault();
         const inicio = (dateCheckIn?.value || "").trim();
@@ -62,23 +76,16 @@ export default function renderHomePage() {
 
                 /* https://getbootstrap.com/docs/5.3/components/modal/ */
                 return;
-
             }
+            divCards.innerHTML = '';
+            quartos.forEach((itemcard, i) => {
+                divCards.appendChild(RoomCard(itemcard, i));
+            })
         }
         catch(erro){
             console.log(erro);
         }
-
     });
-
-    const divCards = document.createElement('div');
-    divCards.innerHTML = '';
-    divCards.className = "cards";
-
-    for (var i = 0; i < 3; i++) {
-        const card = RoomCard(i); 
-        divCards.appendChild(card);
-    }
 
     divRoot.appendChild(divCards);
     

@@ -1,4 +1,12 @@
-export default function RoomCard(index) {
+export default function RoomCard(itemcard, index = 0) {
+  const { nome, numero, qtd_cama_casal, qtd_cama_solteiro, preco } = itemcard || {};
+  const title = nome;
+
+  const camas = [
+    (qtd_cama_casal != null ? `${qtd_cama_casal} camas de casal` : null),
+    (qtd_cama_solteiro != null ? `${qtd_cama_solteiro} camas de solteiro` : null),
+  ].filter(Boolean).join(' - ');
+
   const containerCards = document.createElement("div");
   containerCards.className = "heroContainer-frame";
   containerCards.innerHTML = `
@@ -39,8 +47,13 @@ export default function RoomCard(index) {
         </div>
 
             <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
+                <h5 class="card-title">${title}</h5>
+                
+                <ul class="list-unstyled mb-2">
+                    ${camas? `<li>${camas}</li>` : ""}
+                    ${preco != null ? `<li>Preco: R$ ${Number(preco).toFixed(2)}</li>` : ""}
+                </ul>
+
                 <a href="#" class="btn btn-primary">Reservar</a>
              </div>
         </div>
