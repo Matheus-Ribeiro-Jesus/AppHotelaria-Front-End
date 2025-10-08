@@ -4,6 +4,8 @@ import Footer from "../components/footer.js";
 import RoomCard from "../components/RoomCard.js";
 import DateSelector from "../components/DateSelector.js";
 import { listAvaibleQuartosRequest } from "../api/roomsAPI.js";
+import Spinner from "../components/spinner.js";
+import modal from "../components/modal.js";
 
 export default function renderHomePage() {
 
@@ -22,7 +24,19 @@ export default function renderHomePage() {
     const datePesquisar = DateSelector();
     divRoot.appendChild(datePesquisar);
 
-    const [dateCheckIn, dateCheckOut] = datePesquisar.querySelectorAll('input[type="date"]');
+    const [dateCheckIn, dateCheckOut] = datePesquisar.querySelectorAll('input[type="date"]'); 
+    //Impedindo datas passadas 
+
+    const hoje = new Date().toISOString().split("T")[0]; // -> Converte a data para o formato padrão ISO / exemplo -> "2025-10-08T17:34:52.123Z" -> ".split("T")[0]" / Corta a string no “T” e pega só a parte da data ("2025-10-08").
+    dateCheckIn.min = hoje;
+    dateCheckOut.min = hoje;
+
+    // impede check-out antes do check-in
+    dateCheckIn.addEventListener("change", () =>{
+        dateCheckOut = dateCheckIn.value;
+        dateCheckOut.value = "";
+    });
+
     const guestAmount = datePesquisar.querySelector('select');
 
     const btnSearchRoom = datePesquisar.querySelector('button');
@@ -31,15 +45,6 @@ export default function renderHomePage() {
     divCards.innerHTML = '';
     divCards.className = "cards";
     divCards.id = "cards-result";
-
-
-
-
-
-
-
-
-    
 
     btnSearchRoom.addEventListener("click", async (evento) =>{
         evento.preventDefault();
@@ -56,27 +61,48 @@ export default function renderHomePage() {
         const dtInicio = new Date(inicio);
         const dtFim = new Date(fim);
 
-        if(isNaN(dtInicio) || isNaN(dtFim) || dtInicio >= dtFim){
-            console.log("A data de check-out deve ser posterior a data de check-in");
-            /* Tarefa 2:  */
-            /* https://getbootstrap.com/docs/5.3/components/modal/ */
+        if (isNaN(dtInicio) || isNaN(dtFim) || dtInicio >= dtFim) {
+            const mod = modal({
+                title: "Data inválida",
+                message: "A data de check-out deve ser posterior à data de check-in."
+            });
+
+            const Modal = document.getElementById("modalAviso");
+            if (Modal) Modal.remove();
+
+            document.body.appendChild(mod);
+
+            // Inicializa e exibe o modal
+            const bootstrapModal = new bootstrap.Modal(mod);
+            bootstrapModal.show();
+
             return;
         }
 
-        console.log("Buscando quartos disponiveis");
-        /* Tarefa 3: Renderizar na tela um simbolo de loading (spinner de bootstrap)  */
-
-        /* https://getbootstrap.com/docs/5.3/components/spinners/ */
+        divCards.innerHTML = "";
+        const spi = Spinner();
+        divCards.appendChild(spi);
 
         try{
             const quartos = await listAvaibleQuartosRequest({inicio, fim, qtd});
+            spi.remove();
             if(!quartos.length){
                 console.log("Nenhum quarto disponivel para esse periodo");
-                /* Tarefa 4: Renderizar na tela um modal */
 
-                /* https://getbootstrap.com/docs/5.3/components/modal/ */
+                const mod = modal({
+                    title: "Aviso!",
+                    message: "Nenhum quarto disponivel para esse periodo"
+                });
+
+                const mods = document.getElementById("modalAviso");
+                if(mods) mods.remove();
+                document.body.appendChild(mods);
+
+                const bootstrapModal = new bootstrap.Modal(mods);
+                bootstrapModal.show();
                 return;
             }
+
             divCards.innerHTML = '';
             quartos.forEach((itemcard, i) => {
                 divCards.appendChild(RoomCard(itemcard, i));
@@ -84,6 +110,8 @@ export default function renderHomePage() {
         }
         catch(erro){
             console.log(erro);
+            spi.remove();
+
         }
     });
 
