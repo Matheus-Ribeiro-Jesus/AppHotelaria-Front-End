@@ -11,7 +11,7 @@ class ValidatorController{
         }
         if(!empty($pendets) ){
             $pendets = implode(", ", $pendets);
-            jsonResponse(['message'=> "Erro, Falta o campo: ".$pendets], 402);
+            jsonResponse(['message'=> "Erro, Falta o campo: ".$pendets], 400);
             exit;
         }
     }
