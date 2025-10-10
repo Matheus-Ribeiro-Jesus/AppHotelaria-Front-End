@@ -6,6 +6,7 @@ import DateSelector from "../components/DateSelector.js";
 import { listAvaibleQuartosRequest } from "../api/roomsAPI.js";
 import Spinner from "../components/spinner.js";
 import modal from "../components/modal.js";
+import cartLounge from "../components/cartLounge.js";
 
 export default function renderHomePage() {
 
@@ -23,6 +24,7 @@ export default function renderHomePage() {
 
     const datePesquisar = DateSelector();
     divRoot.appendChild(datePesquisar);
+
 
     const [dateCheckIn, dateCheckOut] = datePesquisar.querySelectorAll('input[type="date"]'); 
     //Impedindo datas passadas 
@@ -45,6 +47,22 @@ export default function renderHomePage() {
     divCards.innerHTML = '';
     divCards.className = "cards";
     divCards.id = "cards-result";
+
+    const loungeItems = [
+        {path: "varanda.jpg", title: "Restaurante", text: "Nosso restaurante é o melhor que tem na cidade "},
+        {path: "spa.avif", title: "SPA", text: "Nosso SPA é oferece tudo que você precisa para relaxar"},
+        {path: "bar.jpg", title: "Bar", text: "Bebidas geladas e refrescante com show ao vivo"},
+
+    ];
+    // Percorre a array loungeItems
+
+    for (let i = 0; i < loungeItems.length; i++){
+        const cardLounge = cartLounge(loungeItems[i], i);
+        divCards.appendChild(cardLounge);
+
+        
+    }
+
 
     btnSearchRoom.addEventListener("click", async (evento) =>{
         evento.preventDefault();
