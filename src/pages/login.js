@@ -50,6 +50,9 @@ export default function renderLoginPage() {
         }
     });
 
+    const campo = document.querySelector(".carrinho");
+    if(campo) campo.remove();
+
     const cadastrarSe = document.createElement('div');
     cadastrarSe.className = 'registerContainer';
 
@@ -59,7 +62,7 @@ export default function renderLoginPage() {
     const criarConta = document.createElement('a');
     criarConta.href = 'register';
     criarConta.className = 'registerButton';
-    criarConta.textContent = 'Criar Conta';
+    criarConta.textContent = 'Criar Conta'; 
 
     cadastrarSe.appendChild(texto);
     cadastrarSe.appendChild(criarConta);

@@ -12,7 +12,7 @@ export default function LoginForm() {
     container.style.maxWidth = '900px'; 
     container.style.height = '500px';
     container.style.border = 'none';
-    container.style.backgroundColor = 'transparent';
+    container.style.backgroundColor = '#ffffff';
     container.style.backdropFilter = 'blur(10px) brightness(0.8)';
 
     container.style.margin = '0 auto'; // Centraliza o card
@@ -36,7 +36,7 @@ export default function LoginForm() {
     const titulo = document.createElement('h1');
     titulo.textContent = 'Login';
     titulo.className = 'titulo mb-4';
-    titulo.style.color = 'white';
+    titulo.style.color = 'black';
     titulo.style.textAlign = 'center';
 
     const formulario = document.createElement('form');

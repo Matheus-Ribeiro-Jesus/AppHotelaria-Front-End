@@ -13,7 +13,7 @@ form {
   color: white;
 }
 .registerButton:hover {
-  color: #00c3ff;
+  color: #dadfe0;
 }
 
 .registerContainer {
@@ -112,6 +112,47 @@ form {
   transform: scale(1.1);
   background-color: rgb(24, 64, 182) !important;
 }
+/* 🌿 Navbar estilo natural e calma */
+
+/* ⚪ Navbar estilo minimalista */
+/* 🩰 Navbar estilo hotel moderno claro */
+.navbar {
+  background-color: #ffffff !important;
+  border-bottom: 1px solid #e6e6e6;
+  padding: 14px 24px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
+.nav-link {
+  color: #3c4a60 !important; /* Azul acinzentado */
+  font-weight: 500;
+  margin-right: 20px;
+  transition: color 0.3s ease;
+}
+.nav-link:hover {
+  color: #6c8ebf !important; /* Azul suave */
+}
+
+.dropdown-menu {
+  background-color: #ffffff;
+  border: 1px solid #e6e6e6;
+}
+.dropdown-item {
+  color: #3c4a60;
+}
+.dropdown-item:hover {
+  background-color: #f0f4f8;
+}
+
+.btn-outline-success {
+  color: #3c4a60;
+  border-color: #3c4a60;
+}
+.btn-outline-success:hover {
+  background-color: #3c4a60;
+  color: #ffffff;
+}
+
 
 /* Responsividade Media Query */
 

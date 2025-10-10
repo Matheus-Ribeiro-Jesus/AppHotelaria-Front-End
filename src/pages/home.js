@@ -53,9 +53,19 @@ export default function renderHomePage() {
         const qtd = parseInt(guestAmount?.value || "0", 10);
 
         if(!inicio || !fim || Number.isNaN(qtd) || qtd <= 0){
-            console.log("Preencha todos os campos");
-            /* Tarefa 1: Renderizar nesse if() posteriormente um modal do boostrap */
-            return;
+            const mod3 = modal({
+                    title: "Aviso!",
+                    message: "Preencha todos os campos"
+                });
+                const Modal = document.getElementById("modalAviso");
+                if (Modal) Modal.remove();
+
+                document.body.appendChild(mod3);
+
+                // Inicializa e exibe o modal
+                const bootstrapModal = new bootstrap.Modal(mod3);
+                bootstrapModal.show();
+                return;
         }
 
         const dtInicio = new Date(inicio);

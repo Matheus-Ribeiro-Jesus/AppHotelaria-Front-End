@@ -49,6 +49,10 @@ export default function renderRegisterPage(){
     confSenha.type = 'password';
     confSenha.placeholder = 'Confirme sua senha';
     confSenha.className = 'inputs';
+
+
+    const campo = document.querySelector(".carrinho");
+    if(campo) campo.remove();
    
     contentForm.insertBefore(InputNome, contentForm.children[0]);
     contentForm.insertBefore(InputCpf, contentForm.children[1]);

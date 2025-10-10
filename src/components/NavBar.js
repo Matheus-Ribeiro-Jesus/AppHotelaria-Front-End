@@ -14,9 +14,6 @@ export default function Navbar(){
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="home">Home</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     Dropdown
@@ -35,10 +32,12 @@ export default function Navbar(){
                     <a class="nav-link" href="login">Login</a>
                 </li>
             </ul>
-            <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Pesquisar" aria-label="Pesquisar"/>
-                <button class="btn btn-outline-success" type="submit">Procurar</button>
-            </form>
+            <div class="carrinho">
+                <a href="carrinho">
+                    <img src="public/assets/imgs/cart-check-fill.svg" style="width="30" height="32" alt="Foto do carrinho">
+                </a>
+            </div>
+
             </div>
         </div>
     </nav> `
