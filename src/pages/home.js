@@ -25,7 +25,6 @@ export default function renderHomePage() {
     const datePesquisar = DateSelector();
     divRoot.appendChild(datePesquisar);
 
-
     const [dateCheckIn, dateCheckOut] = datePesquisar.querySelectorAll('input[type="date"]'); 
     //Impedindo datas passadas 
 
@@ -40,7 +39,6 @@ export default function renderHomePage() {
     });
 
     const guestAmount = datePesquisar.querySelector('select');
-
     const btnSearchRoom = datePesquisar.querySelector('button');
 
     const divCards = document.createElement('div');
@@ -59,10 +57,7 @@ export default function renderHomePage() {
     for (let i = 0; i < loungeItems.length; i++){
         const cardLounge = cartLounge(loungeItems[i], i);
         divCards.appendChild(cardLounge);
-
-        
     }
-
 
     btnSearchRoom.addEventListener("click", async (evento) =>{
         evento.preventDefault();
@@ -115,8 +110,6 @@ export default function renderHomePage() {
             const quartos = await listAvaibleQuartosRequest({inicio, fim, qtd});
             spi.remove();
             if(!quartos.length){
-                console.log("Nenhum quarto disponivel para esse periodo");
-
                 const mod = modal({
                     title: "Aviso!",
                     message: "Nenhum quarto disponivel para esse periodo"

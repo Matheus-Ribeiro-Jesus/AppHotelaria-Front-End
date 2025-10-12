@@ -51,7 +51,7 @@ class PedidosModel{
 
                 // Criar um metodo na classe ReservaModel 
                 // Para avaliar se o quarto está disponivel no intervalo de datas
-                // ReservaModel::isConflict();
+                // ReservaModel::isConflit();
 
                 $reservarResult = ReservaModel::create($conn, [
                     "pedido_id"  => $pedido_id,

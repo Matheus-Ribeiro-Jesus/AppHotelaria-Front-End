@@ -11,7 +11,7 @@
             if($result){
                 return jsonResponse(['message'=> 'Reserva criada com sucesso']);
             }else{
-            return jsonResponse(['message'=> 'Deu merda'], 400);
+            return jsonResponse(['message'=> 'Falha na criação da reserva'], 400);
             }
         }
 

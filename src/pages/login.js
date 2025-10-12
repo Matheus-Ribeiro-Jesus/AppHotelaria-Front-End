@@ -40,8 +40,21 @@ export default function renderLoginPage() {
             if (result.ok){
                 console.log("login realizado com sucesso", result);
                 saveToken(result.token);
-                // Redireciona para a página home
-                window.location.pathname = "estudo_php/home";
+
+                let tipoDoUsuario = "cliente";
+                if(result.raw?.tipo === "funcionario" || result.raw?.role === "admin"){
+                    tipoDoUsuario = "funcionario";
+                
+                }
+                localStorage.setItem("tipo_usuario", tipoDoUsuario);
+
+                if(tipoDoUsuario === "funcioanario"){
+                    console.log("Usuario é funcionario redirecionando.");
+                }else{
+                    console.log("Usuario é cliente redirecionando.")
+                    window.location.pathname = "home";
+                }
+
             }else{
                 console.log('login invalido!');
             }

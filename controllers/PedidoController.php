@@ -11,7 +11,7 @@ class PedidosController
         if ($result) {
             return jsonResponse(['message' => 'Pedido criado com sucesso']);
         } else {
-            return jsonResponse(['message' => 'Deu merda'], 400);
+            return jsonResponse(['message' => 'Falha na criação do pedido'], 400);
         }
     }
 
