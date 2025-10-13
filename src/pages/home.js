@@ -13,22 +13,25 @@ export default function renderHomePage() {
     const divRoot = document.getElementById('root');
     divRoot.innerHTML = '';
 
+    // NavBar
     const nav = document.getElementById('navbar');
     nav.innerHTML = '';
-
     const navbar = Navbar();
     nav.appendChild(navbar);
     
+    // Carrosel
     const hero = Hero();
     divRoot.appendChild(hero);
 
+    // Campo pesquisar
     const datePesquisar = DateSelector();
     divRoot.appendChild(datePesquisar);
 
     const [dateCheckIn, dateCheckOut] = datePesquisar.querySelectorAll('input[type="date"]'); 
-    //Impedindo datas passadas 
 
-    const hoje = new Date().toISOString().split("T")[0]; // -> Converte a data para o formato padrão ISO / exemplo -> "2025-10-08T17:34:52.123Z" -> ".split("T")[0]" / Corta a string no “T” e pega só a parte da data ("2025-10-08").
+    
+    // Impedindo datas passadas 
+    const hoje = new Date().toISOString().split("T")[0]; // --> Converte a data para o formato padrão ISO / exemplo -> "2025-10-08 T 17:34:52.123Z " -> ".split("T")[0]" / Corta a string no “T” e pega só a parte da data ("2025-10-08").
     dateCheckIn.min = hoje;
     dateCheckOut.min = hoje;
 
@@ -46,18 +49,41 @@ export default function renderHomePage() {
     divCards.className = "cards";
     divCards.id = "cards-result";
 
+    const cardsGroupInfra = document.createElement('div');
+    cardsGroupInfra.className = "cards";
+    const tituloInfra = document.createElement('h2');
+    tituloInfra.textContent = 'Conheça nosso hotel';
+    tituloInfra.style.textAlign = 'center';
+
     const loungeItems = [
         {path: "varanda.jpg", title: "Restaurante", text: "Nosso restaurante é o melhor que tem na cidade "},
         {path: "spa.avif", title: "SPA", text: "Nosso SPA é oferece tudo que você precisa para relaxar"},
         {path: "bar.jpg", title: "Bar", text: "Bebidas geladas e refrescante com show ao vivo"},
 
     ];
-    // Percorre a array loungeItems
 
+    // Percorre a array loungeItems
     for (let i = 0; i < loungeItems.length; i++){
         const cardLounge = cartLounge(loungeItems[i], i);
-        divCards.appendChild(cardLounge);
+        cardsGroupInfra.appendChild(cardLounge);
     }
+    // A depender da data de checkin será calculado o minimo para a data de checkout (O minimo de diarias)
+    function getMinDateCheckout(dateCheckIn){
+        const minDaily = new Date(dateCheckIn);
+        minDaily.setDate(minDaily.getDate() + 1);
+        return minDaily.toISOString().split('T')[0];
+    }
+
+    // Evento para monitorar a alteração no data de check-in para mudar o calendario do checkout
+
+    dateCheckIn.addEventListener('change', async (e) =>{
+        e.preventDefault();
+        if(this.value){
+            const minDateCheckout = getMinDateCheckout(this.value);
+            dateCheckOut.min = minDateCheckout;
+        }   
+
+    });
 
     btnSearchRoom.addEventListener("click", async (evento) =>{
         evento.preventDefault();
@@ -132,11 +158,12 @@ export default function renderHomePage() {
         catch(erro){
             console.log(erro);
             spi.remove();
-
         }
     });
 
     divRoot.appendChild(divCards);
+    divRoot.appendChild(tituloInfra);
+    divRoot.appendChild(cardsGroupInfra);
     
     //Footer
     const fot = document.getElementById('footer');
