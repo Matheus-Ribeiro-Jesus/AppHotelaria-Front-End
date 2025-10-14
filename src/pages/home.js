@@ -35,11 +35,6 @@ export default function renderHomePage() {
     dateCheckIn.min = hoje;
     dateCheckOut.min = hoje;
 
-    // impede check-out antes do check-in
-    dateCheckIn.addEventListener("change", () =>{
-        dateCheckOut = dateCheckIn.value;
-        dateCheckOut.value = "";
-    });
 
     const guestAmount = datePesquisar.querySelector('select');
     const btnSearchRoom = datePesquisar.querySelector('button');
@@ -78,13 +73,13 @@ export default function renderHomePage() {
 
     dateCheckIn.addEventListener('change', async (e) => {
         // Se houver um valor valido em dateCheckin
-        if(dateCheckOut.value){
+        if(dateCheckIn.value){
             const minDateCheckout = getMinDateCheckout(dateCheckIn.value);
             dateCheckOut.min = minDateCheckout;
 
         // Se ja houver um data de chec-out selecionada e for invalida
             if(dateCheckOut.value && dateCheckOut.value <= dateCheckIn.value){
-                dateCheckOut = "";
+                dateCheckOut.value = "";
                 alert('A data de check-out deve ser posterior à data de check-in.');
             }
         }
@@ -93,17 +88,17 @@ export default function renderHomePage() {
 
     // Evento para alterar o calendario de check=out dinamicamente, isto é de acordo com a interação do cliente
 
-    dateCheckOut.addEventListener("change", async (e) => {
-        if(dateCheckIn.value && dateCheckOut.value){
-            const checkInValue = new Date(dateCheckIn.value);
-            const checkOutValue = new Date(dateCheckOut.value);
+    // dateCheckOut.addEventListener("change", async (e) => {
+    //     if(dateCheckIn.value && dateCheckOut.value){
+    //         const checkInValue = new Date(dateCheckIn.value);
+    //         const checkOutValue = new Date(dateCheckOut.value);
             
-            if(checkOutValue <= checkInValue){
-                dateCheckOut.value = "";
-                alert("A data de check-out deve ser posteior ao check-in ")
-            }
-        }
-    });
+    //         if(checkOutValue <= checkInValue){
+    //             dateCheckOut.value = "";
+    //             alert("A data de check-out deve ser posterior ao check-in ")
+    //         }
+    //     }
+    // });
 
     btnSearchRoom.addEventListener("click", async (evento) => {
         evento.preventDefault();
@@ -125,6 +120,27 @@ export default function renderHomePage() {
                 const bootstrapModal = new bootstrap.Modal(mod3);
                 bootstrapModal.show();
                 return;
+        }
+
+        const dtInicio = new Date(inicio);
+        const dtFim = new Date(fim);
+
+        if (isNaN(dtInicio) || isNaN(dtFim) || dtInicio >= dtFim) {
+            const mod = modal({
+                title: "Data inválida",
+                message: "A data de check-out deve ser posterior à data de check-in."
+            });
+
+            const Modal = document.getElementById("modalAviso");
+            if (Modal) Modal.remove();
+
+            document.body.appendChild(mod);
+
+            // Inicializa e exibe o modal
+            const bootstrapModal = new bootstrap.Modal(mod);
+            bootstrapModal.show();
+
+            return;
         }
 
         divCards.innerHTML = "";

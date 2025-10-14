@@ -90,7 +90,7 @@ form {
 
 .cards{
   display: flex;
-  flex-direction: wrap;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   gap: 45px;

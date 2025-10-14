@@ -2,12 +2,14 @@ import renderLoginPage from "./pages/login.js";
 import renderHomePage from "./pages/home.js";
 import renderRegisterPage from "./pages/register.js";
 import RenderCarrinhoPage from "./pages/carrinho.js";
+import RenderRegisterRoom from "./pages/register-room.js";
 
 const routes = {
     "/login": renderLoginPage,
     "/register": renderRegisterPage,
     "/home":  renderHomePage,
-    "/carrinho": RenderCarrinhoPage
+    "/carrinho": RenderCarrinhoPage,
+    "/quartos-register": RenderRegisterRoom
     //Novas paginas aqui adicionadas conforme desenvolvidas
 };
 
