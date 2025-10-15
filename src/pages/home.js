@@ -35,7 +35,6 @@ export default function renderHomePage() {
     dateCheckIn.min = hoje;
     dateCheckOut.min = hoje;
 
-
     const guestAmount = datePesquisar.querySelector('select');
     const btnSearchRoom = datePesquisar.querySelector('button');
 
@@ -85,20 +84,6 @@ export default function renderHomePage() {
         }
 
     });
-
-    // Evento para alterar o calendario de check=out dinamicamente, isto é de acordo com a interação do cliente
-
-    // dateCheckOut.addEventListener("change", async (e) => {
-    //     if(dateCheckIn.value && dateCheckOut.value){
-    //         const checkInValue = new Date(dateCheckIn.value);
-    //         const checkOutValue = new Date(dateCheckOut.value);
-            
-    //         if(checkOutValue <= checkInValue){
-    //             dateCheckOut.value = "";
-    //             alert("A data de check-out deve ser posterior ao check-in ")
-    //         }
-    //     }
-    // });
 
     btnSearchRoom.addEventListener("click", async (evento) => {
         evento.preventDefault();
