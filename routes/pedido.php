@@ -15,7 +15,6 @@ if ($_SERVER['REQUEST_METHOD'] === "GET") {
 elseif($_SERVER['REQUEST_METHOD'] === "POST"){
     $opcao = $seguimentos[2] ?? null;
     $data = json_decode(file_get_contents('php://input'), true);
-    
     if($opcao == "reserva"){
         PedidosController::createOrder($conn, $data);
     }else{

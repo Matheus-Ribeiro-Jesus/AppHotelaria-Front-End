@@ -45,3 +45,28 @@ export async function listAvaibleQuartosRequest({ inicio, fim, qtd }){
     return quartos;
     
 }
+
+export async function creatQuartos(nome, numero, qtd_cama_casal, qtd_cama_solteiro, preco){
+    const dados = { nome, numero, qtd_cama_casal, qtd_cama_solteiro, preco };
+
+    const response = await fetch("api/quartos", {
+        method: "POST",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(dados),
+        credentials: "same-origin"
+    });
+
+    let data = null;
+    try{
+        data = await response.json();
+    }catch{
+        data = null;
+    }
+    return{ 
+        ok:true,
+        raw:data
+    };
+}

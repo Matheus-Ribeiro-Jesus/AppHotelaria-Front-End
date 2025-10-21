@@ -8,12 +8,14 @@ export async function createRequest(nome, cpf, telefone, email, senha){
             "Content-Type": "application/json"
         },
         body: JSON.stringify(dados),
+
         // body: new URLSearchParams({ email, senha }).toString(),
 
         /* URL da rquisição é a mesma da origem do front (mesmo protocolo http/mesmo dominio - local/mesma porta 80 do servidor web Apache)
         Front: http://localhost/estudo_php/public/index.html
         Back: http://localhost/estudo_php/api/login.php
         */
+       
        credentials: "same-origin"
 
     });

@@ -28,7 +28,6 @@ elseif ( $_SERVER['REQUEST_METHOD'] === "POST" ){
     QuartosController::create($conn, $data);
 }
 
-
 elseif ( $_SERVER['REQUEST_METHOD'] === "PUT" ){
     $data = json_decode( file_get_contents('php://input'), true );
     $id = $data['id'];
