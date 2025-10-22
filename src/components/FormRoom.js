@@ -6,8 +6,8 @@ export default function FormRoom() {
     const container = document.createElement('div');
     container.className = 'card p-4 shadow-lg d-flex flex-row';
     container.style.width = '100%';
-    container.style.maxWidth = '900px';
-    container.style.height = '500px';
+    container.style.maxWidth = '1020px';
+    container.style.height = '588px';
     container.style.border = 'none';
     container.style.backgroundColor = '#ffffff';
     container.style.backdropFilter = 'blur(10px) brightness(0.8)';
@@ -15,7 +15,7 @@ export default function FormRoom() {
 
     const leftSide = document.createElement('div');
     leftSide.className = 'left-side d-flex align-items-center justify-content-center';
-    leftSide.style.width = '57%';
+    leftSide.style.width = '60%';
     leftSide.style.backgroundImage = 'url("public/assets/imgs/LeftSide.jpg")';
     leftSide.style.backgroundSize = 'cover';
     leftSide.style.backgroundPosition = 'center';
@@ -70,6 +70,16 @@ export default function FormRoom() {
     preco.className = 'inputs';
     formulario.appendChild(preco);
 
+    const arqv = document.createElement('div');
+    arqv.innerHTML = `
+        <div class="mb-3">
+            <label for="formFileMultiple" class="form-label">Imagens do quarto</label>
+            <input class="form-control" type="file" id="formFileMultiple" multiple>
+        </div>
+    `;
+    arqv.className = 'arquivo';
+    formulario.appendChild(arqv);
+
     const disponibilidadeContainer = document.createElement('div');
     disponibilidadeContainer.className = 'd-flex align-items-center mt-3';
     disponibilidadeContainer.style.gap = '10px';
@@ -97,7 +107,6 @@ export default function FormRoom() {
 
     const labelNao = document.createElement('label');
     labelNao.textContent = 'Não';
-
     disponibilidadeContainer.appendChild(perguntaDisponivel);
     disponibilidadeContainer.appendChild(disponivelSim);
     disponibilidadeContainer.appendChild(labelSim);
