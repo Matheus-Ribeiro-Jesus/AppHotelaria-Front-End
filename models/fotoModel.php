@@ -13,42 +13,40 @@ class fotoModel
         }
         return false;
     }
-    
-    public static function listarTodos($conn){
-        $sql = "SELECT * from imagens";
-        $stmt = $conn->prepare($sql);
+ 
+    public static function getAll($conn){
+        $sql = "SELECT * FROM imagens";
         $result = $conn->query($sql);
         return $result->fetch_all(MYSQLI_ASSOC);
     }
+
     public static function getById($conn, $id){
         $sql = "SELECT * FROM imagens WHERE id = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("i", $id);
         $stmt->execute();
-        return $stmt->get_result()->fetch_all();
+        return $stmt->get_result()->fetch_assoc();
     }
 
     public static function getByRoomId($conn, $id){
-        $sql = "SELECT f.nome 
-        FROM upimages upi 
-        JOIN fotos f 
-        ON upi.image_id = f.id 
-        WHERE upi.quartos_id = ?";
+        $sql = "SELECT i.nome
+        FROM upimages upi
+        JOIN imagens i ON upi.image_id = i.id
+        WHERE upi.quarto_id = ?";
 
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("i", $id);
         $stmt->execute();
         $result = $stmt->get_result();
         $photos = [];
-        while( $row = $result->fetch_assoc()){
+        while ( $row = $result->fecth_assoc()){
             $photos[] = $row['nome'];
         }
         return $photos;
-
     }
 
     public static function createRelationsRoom($conn, $idRoom, $idPhoto){
-        $sql = "INSERT INTO upimages (quarto_id, image_id) VALUES ( ?, ?)";
+        $sql = "INSERT INTO upimages (quarto_id, image_id) VALUES (?, ?)";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("ii", $idRoom, $idPhoto);
         if($stmt->execute()){
@@ -66,7 +64,7 @@ class fotoModel
     }
 
     public static function update($conn, $id, $data){
-        $sql = "UPDATE imagens SET nome = ? WHERE id = ?";
+        $sql = "UPDATE imagens  SET nome = ? WHERE id = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("si",
         $data["nome"],
