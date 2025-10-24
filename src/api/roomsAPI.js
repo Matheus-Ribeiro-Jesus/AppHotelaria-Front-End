@@ -1,3 +1,37 @@
+export async function addRoom(formulario){
+    const formData = new FormData(formulario);
+    const TypesAccept = ['image/jpg', 'image/png'];
+    const inputFotos = formulario.querySelector('#formFileMultiple');
+    
+    const imgs = inputFotos.files;
+    for (let i = 0; i < imgs.length; i++){
+
+        if(!TypesAccept.includes(imgs[i].type)){
+            throw new Error(`Arquivos "${imgs[i].name}" não é suportado. Selecione um arquivo JPG ou PNG`);
+        }
+    }
+
+    const url = `api/quartos`;
+    const response = await fetch(url, {
+        method: "POST",
+        body: formData
+    });
+    if(!response.ok) {
+        throw new Error(`Erro ao enviar requisição: ${response.status}`);
+    }
+    const result = await response.json();
+    return result;
+}
+
+
+
+
+
+
+
+
+
+
 /* getToken() é uma função que retorna o valor do token armazenado no localStorage(), para que o usuario permaneça logado mesmo que mude 
 de pagina e nao tenha "re-logar" */
 
@@ -46,27 +80,3 @@ export async function listAvaibleQuartosRequest({ inicio, fim, qtd }){
     
 }
 
-export async function creatQuartos(nome, numero, qtd_cama_casal, qtd_cama_solteiro, preco){
-    const dados = { nome, numero, qtd_cama_casal, qtd_cama_solteiro, preco };
-
-    const response = await fetch("api/quartos", {
-        method: "POST",
-        headers: {
-            "Accept": "application/json",
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(dados),
-        credentials: "same-origin"
-    });
-
-    let data = null;
-    try{
-        data = await response.json();
-    }catch{
-        data = null;
-    }
-    return{ 
-        ok:true,
-        raw:data
-    };
-}

@@ -1,3 +1,5 @@
+import { addRoom } from '../api/roomsAPI.js';
+
 export default function FormRoom() {
     const DivRoot = document.getElementById('root');
     DivRoot.innerHTML = '';
@@ -33,6 +35,7 @@ export default function FormRoom() {
 
     const formulario = document.createElement('form');
     formulario.className = 'd-flex flex-column';
+    formulario.enctype = 'multipart/form-data';
 
     const InputNome = document.createElement('input');
     InputNome.type = 'text';
@@ -40,6 +43,7 @@ export default function FormRoom() {
     InputNome.max = '50';
     InputNome.placeholder = "Digite o nome do quarto";
     InputNome.className = 'inputs';
+    InputNome.name = 'nome';
     formulario.appendChild(InputNome);
 
     const InputNumero = document.createElement('input');
@@ -47,9 +51,8 @@ export default function FormRoom() {
     InputNumero.style.textAlign = 'left';
     InputNumero.placeholder = "Digite o numero";
     InputNumero.className = 'inputs';
+    InputNumero.name = 'numero';
     formulario.appendChild(InputNumero);
-
-
 
     const qtd_cama_casal = document.createElement('select');
     qtd_cama_casal.className = 'inputs';
@@ -59,6 +62,7 @@ export default function FormRoom() {
         <option value="1">1</option>
         <option value="2">2</option>
         <option value="3">3</option>`;
+    qtd_cama_casal.name = 'qtd_cama_casal';
     formulario.appendChild(qtd_cama_casal);
 
     const qtd_cama_solteiro = document.createElement('select');
@@ -69,6 +73,7 @@ export default function FormRoom() {
         <option value="1">1</option>
         <option value="2">2</option>
         <option value="3">3</option>`;
+    qtd_cama_solteiro.name = 'qtd_cama_solteiro';
     formulario.appendChild(qtd_cama_solteiro);
 
     const InputPreco = document.createElement('input');
@@ -77,17 +82,20 @@ export default function FormRoom() {
     InputPreco.placeholder = 'Digite o preço do quarto';
     InputPreco.className = 'inputs';
     InputPreco.step = "0.01";
+    InputPreco.name = 'preco';
     formulario.appendChild(InputPreco);
 
-    const arqv = document.createElement('div');
-    arqv.innerHTML = `
+    const inputFotos = document.createElement('div');
+    inputFotos.innerHTML = `
         <div class="mb-3">
             <label for="formFileMultiple" class="form-label">Imagens do quarto</label>
-            <input class="form-control" type="file" id="formFileMultiple" multiple>
+            <input name="fotos[]" class="form-control" type="file" id="formFileMultiple" accept="image/*" multiple>
         </div>
     `;
-    arqv.className = 'arquivo';
-    formulario.appendChild(arqv);
+    inputFotos.name = 'fotos';
+    inputFotos.className = 'arquivo';
+
+    formulario.appendChild(inputFotos);
 
     const disponibilidadeContainer = document.createElement('div');
     disponibilidadeContainer.className = 'd-flex align-items-center mt-3';
@@ -129,6 +137,16 @@ export default function FormRoom() {
     btnSubmit.textContent = 'Cadastrar Quarto';
     btnSubmit.className = 'btn btn-primary mt-4';
     formulario.appendChild(btnSubmit);
+
+    formulario.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        try {
+            const response = await addRoom(formulario);
+            console.log("Resposta do servidor: " + response);
+        } catch (error) {
+            console.log("Erro ao enviar requisição: " + error.message);
+        }
+    })
 
     rightSide.appendChild(titulo);
     rightSide.appendChild(formulario);
