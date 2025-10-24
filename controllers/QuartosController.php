@@ -13,7 +13,7 @@ class QuartosController{
         if ($result){
             if($data['fotos']){
                 $pictures = UploadController::upload($data['fotos']);
-                foreach($pictures['photos'] as $name){
+                foreach($pictures['saves'] as $name){
                     $idPhoto = fotoModel::create($conn, $name['name']);
                     if($idPhoto){
                         fotoModel::createRelationsRoom($conn, $result, $idPhoto);
@@ -64,6 +64,9 @@ class QuartosController{
 
         $result = QuartosModel::get_available($conn, $data);
         if($result){
+            foreach ($result as &$quarto) {
+                $quarto['fotos'] = fotoModel::getByRoomId($conn, $quarto['id']);
+            }
             return jsonResponse(['Quartos'=> $result]);
         }else{
             return jsonResponse(['message'=> 'Deu erro'], 400);

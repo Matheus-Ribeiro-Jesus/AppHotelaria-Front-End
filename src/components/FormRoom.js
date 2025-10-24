@@ -34,41 +34,50 @@ export default function FormRoom() {
     const formulario = document.createElement('form');
     formulario.className = 'd-flex flex-column';
 
-    const nome = document.createElement('input');
-    nome.type = 'text';
-    nome.style.textAlign = 'left';
-    nome.max = '50';
-    nome.placeholder = "Digite o nome do quarto";
-    nome.className = 'inputs';
-    formulario.appendChild(nome);
+    const InputNome = document.createElement('input');
+    InputNome.type = 'text';
+    InputNome.style.textAlign = 'left';
+    InputNome.max = '50';
+    InputNome.placeholder = "Digite o nome do quarto";
+    InputNome.className = 'inputs';
+    formulario.appendChild(InputNome);
 
-    const numero = document.createElement('input');
-    numero.type = 'text';
-    numero.style.textAlign = 'left';
-    numero.placeholder = "Digite o numero";
-    numero.className = 'inputs';
-    formulario.appendChild(numero);
-    const qtd_cama_casal = document.createElement('input');
-    qtd_cama_casal.type = 'number';
-    qtd_cama_casal.style.textAlign = 'left';
+    const InputNumero = document.createElement('input');
+    InputNumero.type = 'text';
+    InputNumero.style.textAlign = 'left';
+    InputNumero.placeholder = "Digite o numero";
+    InputNumero.className = 'inputs';
+    formulario.appendChild(InputNumero);
 
-    qtd_cama_casal.placeholder = 'Quantidade cama casal';
+
+
+    const qtd_cama_casal = document.createElement('select');
     qtd_cama_casal.className = 'inputs';
+    qtd_cama_casal.style.textAlign = 'left';
+    qtd_cama_casal.innerHTML = `
+        <option value="">Selecione quantidade cama de casal</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>`;
     formulario.appendChild(qtd_cama_casal);
-    const qtd_cama_solteiro = document.createElement('input');
-    qtd_cama_solteiro.type = 'number';
-    qtd_cama_solteiro.style.textAlign = 'left';
 
-    qtd_cama_solteiro.placeholder = 'Quantidade cama solteiro';
+    const qtd_cama_solteiro = document.createElement('select');
     qtd_cama_solteiro.className = 'inputs';
+    qtd_cama_solteiro.style.textAlign = 'left';
+    qtd_cama_solteiro.innerHTML = `
+        <option value="">Selecione quantidade cama de solteiro</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>`;
     formulario.appendChild(qtd_cama_solteiro);
 
-    const preco = document.createElement('input');
-    preco.type = 'number';
-    preco.style.textAlign = 'left';
-    preco.placeholder = 'Digite o preço do quarto';
-    preco.className = 'inputs';
-    formulario.appendChild(preco);
+    const InputPreco = document.createElement('input');
+    InputPreco.type = 'number';
+    InputPreco.style.textAlign = 'left';
+    InputPreco.placeholder = 'Digite o preço do quarto';
+    InputPreco.className = 'inputs';
+    InputPreco.step = "0.01";
+    formulario.appendChild(InputPreco);
 
     const arqv = document.createElement('div');
     arqv.innerHTML = `
@@ -86,7 +95,7 @@ export default function FormRoom() {
     disponibilidadeContainer.style.justifyContent = 'center';
 
     const perguntaDisponivel = document.createElement('h2');
-    perguntaDisponivel.textContent = 'O quarto está disponível?';
+    perguntaDisponivel.textContent = 'O quarto está disponível: ';
     perguntaDisponivel.style.fontSize = '18px';
     perguntaDisponivel.style.margin = '0';
     perguntaDisponivel.style.color = '#000';
@@ -94,19 +103,20 @@ export default function FormRoom() {
     const disponivelSim = document.createElement('input');
     disponivelSim.type = 'radio';
     disponivelSim.name = 'disponivel';
-    disponivelSim.value = 'true';
+    disponivelSim.value = true;
 
     const labelSim = document.createElement('label');
     labelSim.textContent = 'Sim';
-    labelSim.style.marginRight = '10px';
+    labelSim.style.marginRight = '25px';
 
     const disponivelNao = document.createElement('input');
     disponivelNao.type = 'radio';
     disponivelNao.name = 'disponivel';
-    disponivelNao.value = 'false';
+    disponivelNao.value = false;
 
     const labelNao = document.createElement('label');
     labelNao.textContent = 'Não';
+    
     disponibilidadeContainer.appendChild(perguntaDisponivel);
     disponibilidadeContainer.appendChild(disponivelSim);
     disponibilidadeContainer.appendChild(labelSim);
