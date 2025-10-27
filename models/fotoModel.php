@@ -53,7 +53,6 @@ class fotoModel
             return $conn->insert_id;
         }
         return false;
-
     }
 
     public static function delete($conn, $id){

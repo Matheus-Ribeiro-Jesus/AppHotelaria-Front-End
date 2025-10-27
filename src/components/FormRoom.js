@@ -111,7 +111,7 @@ export default function FormRoom() {
     const disponivelSim = document.createElement('input');
     disponivelSim.type = 'radio';
     disponivelSim.name = 'disponivel';
-    disponivelSim.value = true;
+    disponivelSim.value = "1";
 
     const labelSim = document.createElement('label');
     labelSim.textContent = 'Sim';
@@ -120,7 +120,7 @@ export default function FormRoom() {
     const disponivelNao = document.createElement('input');
     disponivelNao.type = 'radio';
     disponivelNao.name = 'disponivel';
-    disponivelNao.value = false;
+    disponivelNao.value = "0";
 
     const labelNao = document.createElement('label');
     labelNao.textContent = 'Não';
@@ -136,13 +136,14 @@ export default function FormRoom() {
     btnSubmit.type = 'submit';
     btnSubmit.textContent = 'Cadastrar Quarto';
     btnSubmit.className = 'btn btn-primary mt-4';
+    
     formulario.appendChild(btnSubmit);
 
     formulario.addEventListener('submit', async (event) => {
         event.preventDefault();
         try {
             const response = await addRoom(formulario);
-            console.log("Resposta do servidor: " + response);
+            console.log("Resposta do servidor: " , response);
         } catch (error) {
             console.log("Erro ao enviar requisição: " + error.message);
         }

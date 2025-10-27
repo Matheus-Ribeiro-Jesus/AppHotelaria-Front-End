@@ -1,6 +1,8 @@
-function calculoDiaria() {
-    const checkIn = "2026-01-01";
-    const checkOut = "2026-01-08";
+import { addItemToCart } from '../store/cartStore.js';
+
+function calculoDiaria(checkIn, checkOut) {
+    // const checkIn = "2026-01-01";
+    // const checkOut = "2026-01-08";
 
     const [yin, min, din] = String(checkIn).split("-").map(Number);
     const [yout, mout, dout] = String(checkOut).split("-").map(Number);
@@ -13,7 +15,7 @@ function calculoDiaria() {
 
 
 export default function RoomCard(itemcard, index = 0) {
-  const { nome, numero, qtd_cama_casal, qtd_cama_solteiro, preco } = itemcard || {};
+  const { id, nome, numero, qtd_cama_casal, qtd_cama_solteiro, preco } = itemcard || {};
   const title = nome;
 
   const camas = [
@@ -68,10 +70,50 @@ export default function RoomCard(itemcard, index = 0) {
                     ${preco != null ? `<li>Preço diaria: R$ ${Number(preco).toFixed(2)}</li>` : ""}
                 </ul>
 
-                <a href="#" class="btn btn-primary">Reservar</a>
+                <a href="#" class="btn btn-primary btn-reservar">Reservar</a>
              </div>
         </div>
   `;
+
+  containerCards.querySelector(".btn-reservar").addEventListener('click', (e) => {
+    e.preventDefault();
+
+    // Ler informações setadas nos inputs dateChekcin , dateCheckout e guestAmount (seu)
+
+    const idDateCheckin = document.getElementsById('id-dateCheckIn');
+    const idDateCheckOut = document.getElementsById('id-dateCheckOut');
+    const idguestAmount = document.getElementsById('id-guestAmount');
+
+    const inicio = (idDateCheckin?.valiue || "");
+    const fim = (idDateCheckOut?.value || "");
+    const qtd = parseInt(idguestAmount?.value || "0", 10);
+    if(!inicio || !fim || Number.isNaN(qtd) || qtd <= 0){
+        console.log("Preencha todos os campos");
+        return;
+
+    }
+    const dailty = calculoDiaria(inicio, fim);
+
+    const subtotal = parseFloat(preco) * dailty;
+    console.log(subtotal);
+
+    const novoItemReserva = {
+        id,
+        checkIn: inicio,
+        checkOut: fim,
+        guests: qtd,
+        daily,
+        subtotal
+    }
+  });
+
+
+  addItemToCart(novoItemReserva);
+  alert(`Reserva do quarto adicionada: ${nome} - Preço/Diaria: R$ ${preco} - Numero de diarias: ${dailty} - Subtotal: R$ ${subtotal} `);
+  
+  
+
+
   console.log(calculoDiaria());
   return containerCards;
 }

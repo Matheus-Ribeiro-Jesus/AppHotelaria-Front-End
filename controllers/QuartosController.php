@@ -7,7 +7,7 @@ require_once __DIR__ . "/../models/fotoModel.php";
 class QuartosController{
 
     public static function create($conn, $data){
-        ValidatorController::validate_data($data, ["nome", "numero", "qtd_casal", "qtd_solteiro", "preco", "disponivel"]);
+        ValidatorController::validate_data($data, ["nome", "numero", "qtd_cama_casal", "qtd_cama_solteiro", "preco", "disponivel"]);
 
         $result = QuartosModel::create($conn, $data);
         if ($result){

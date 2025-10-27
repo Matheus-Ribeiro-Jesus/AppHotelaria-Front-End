@@ -1,11 +1,10 @@
 export async function addRoom(formulario){
     const formData = new FormData(formulario);
-    const TypesAccept = ['image/jpg', 'image/png'];
+    const TypesAccept = ['image/jpeg', 'image/png'];
     const inputFotos = formulario.querySelector('#formFileMultiple');
     
     const imgs = inputFotos.files;
     for (let i = 0; i < imgs.length; i++){
-
         if(!TypesAccept.includes(imgs[i].type)){
             throw new Error(`Arquivos "${imgs[i].name}" não é suportado. Selecione um arquivo JPG ou PNG`);
         }
@@ -16,20 +15,17 @@ export async function addRoom(formulario){
         method: "POST",
         body: formData
     });
-    if(!response.ok) {
-        throw new Error(`Erro ao enviar requisição: ${response.status}`);
+    let result = null;
+    try{
+        result = await response.json();
+    }catch{
+        result = null;
+        if(!response.ok) {
+            throw new Error(`Erro ao enviar requisição: ${response.status}`);
+        }
     }
-    const result = await response.json();
     return result;
 }
-
-
-
-
-
-
-
-
 
 
 /* getToken() é uma função que retorna o valor do token armazenado no localStorage(), para que o usuario permaneça logado mesmo que mude 

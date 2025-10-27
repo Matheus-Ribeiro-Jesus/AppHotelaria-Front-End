@@ -1,7 +1,7 @@
 import Hero from "../components/hero.js";
 import Navbar from "../components/NavBar.js";
 import Footer from "../components/footer.js";
-import RoomCard from "../components/RoomCard.js";
+import RoomCard from "../components/roomCard.js";
 import DateSelector from "../components/DateSelector.js";
 import { listAvaibleQuartosRequest } from "../api/roomsAPI.js";
 import Spinner from "../components/spinner.js";
@@ -28,7 +28,6 @@ export default function renderHomePage() {
     divRoot.appendChild(datePesquisar);
 
     const [dateCheckIn, dateCheckOut] = datePesquisar.querySelectorAll('input[type="date"]'); 
-
     
     // Impedindo datas passadas 
     const hoje = new Date().toISOString().split("T")[0]; // --> Converte a data para o formato padrão ISO / exemplo -> "2025-10-08 T 17:34:52.123Z " -> ".split("T")[0]" / Corta a string no “T” e pega só a parte da data ("2025-10-08").
@@ -37,6 +36,10 @@ export default function renderHomePage() {
 
     const guestAmount = datePesquisar.querySelector('select');
     const btnSearchRoom = datePesquisar.querySelector('button');
+
+    guestAmount.id = 'id-guestAmount';
+    dateCheckIn.id = 'id-dateCheckIn';
+    dateCheckOut.id = 'id-dateCheckOut';
 
     const divCards = document.createElement('div');
     divCards.innerHTML = '';
@@ -142,10 +145,9 @@ export default function renderHomePage() {
                 });
 
                 const mods = document.getElementById("modalAviso");
-                if(mods) mods.remove();
                 document.body.appendChild(mods);
 
-                const bootstrapModal = new bootstrap.Modal(mods);
+                const bootstrapModal = new bootstrap.Modal(mod);
                 bootstrapModal.show();
                 return;
             }

@@ -1,10 +1,11 @@
 const key = "hotel_cart";
 
-export default function setCart(cart){
+export function setCart(cart){
     localStorage.setItem(key, JSON.stringify(cart));
 
 }
-export default function getCart(){
+
+export function getCart(){
     try{
         const raw = localStorage.getItem(key);
         return raw ? JSON.parse(raw) : { status: "draft", item: [] };
@@ -13,7 +14,7 @@ export default function getCart(){
     }
 }
 
-export default function addItemToCart(item){
+export function addItemToCart(item){
     const cart = getCart();
     cart.item.push(item);
     setCart(cart);
@@ -21,14 +22,14 @@ export default function addItemToCart(item){
 
 }
 
-export default function removeItemFromHotel_Cart(i){
+export function removeItemFromHotel_Cart(i){
     const hotel_cart = getCart();
     hotel_cart.items.splice(i, 1);
     setCart(hotel_cart);
     return hotel_cart;
 }
 
-export default function clearHotel_cart(){
+export function clearHotel_cart(){
     setCart(
         {
             status: "draft",
@@ -37,7 +38,7 @@ export default function clearHotel_cart(){
     );
 }
 
-export default function getTotalItems(){
+export function getTotalItems(){
     const { items } = getCart();
     const total = items.reduce((acc, it) =>
         acc + Number(it.subtotal || 0), 0
