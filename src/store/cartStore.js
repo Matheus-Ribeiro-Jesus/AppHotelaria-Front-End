@@ -1,22 +1,22 @@
 const key = "hotel_cart";
 
-export function setCart(cart){
-    localStorage.setItem(key, JSON.stringify(cart));
-
+export function setCart(hotel_cart){
+    localStorage.setItem(key, JSON.stringify(Array.isArray(hotel_cart) ? hotel_cart: []));
 }
 
 export function getCart(){
     try{
         const raw = localStorage.getItem(key);
-        return raw ? JSON.parse(raw) : { status: "draft", item: [] };
-    }catch(erro){
-        return { status: "draft", items: [] };
+        const hotel_cart = raw ? JSON.parse(raw) : [];
+        return Array.isArray(hotel_cart) ? hotel_cart : [];
+    }catch{
+        return [];
     }
 }
 
 export function addItemToCart(item){
     const hotel_cart = getCart();
-    hotel_cart.item.push(item);
+    hotel_cart.push(item);
     setCart(hotel_cart);
     return hotel_cart;
 
@@ -24,18 +24,13 @@ export function addItemToCart(item){
 
 export function removeItemFromHotel_Cart(i){
     const hotel_cart = getCart();
-    hotel_cart.items.splice(i, 1);
+    hotel_cart.splice(i, 1);
     setCart(hotel_cart);
     return hotel_cart;
 }
 
 export function clearHotel_cart(){
-    setCart(
-        {
-            status: "draft",
-            item: []
-        }
-    );
+    setCart([]);
 }
 
 export function getTotalItems(){
@@ -45,6 +40,5 @@ export function getTotalItems(){
     );
     return {
         total,
-        qtde_items: items.length
     };
 }

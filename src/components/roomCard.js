@@ -2,9 +2,6 @@ import { addItemToCart } from '../store/cartStore.js';
 import modal from './modal.js';
 
 function calculoDiaria(checkIn, checkOut) {
-    // const checkIn = "2026-01-01";
-    // const checkOut = "2026-01-08";
-
     const [yin, min, din] = String(checkIn).split("-").map(Number);
     const [yout, mout, dout] = String(checkOut).split("-").map(Number);
 
@@ -13,7 +10,6 @@ function calculoDiaria(checkIn, checkOut) {
     return Math.floor((tzout - tzin) / (1000 * 60 * 60 * 24) );
 
 }
-
 
 export default function RoomCard(itemcard, index = 0) {
   const { id, nome, numero, qtd_cama_casal, qtd_cama_solteiro, preco } = itemcard || {};
@@ -40,15 +36,15 @@ export default function RoomCard(itemcard, index = 0) {
             <div class="carousel-inner shadow">
 
                 <div class="carousel-item active">
-                    <img class="d-block w-100" src="public/assets/imgs/images2.jpg" alt="First slide">
+                    <img class="d-block w-100" src="public/assets/imgs/image2.jpg" alt="First slide">
                 </div>
 
                 <div class="carousel-item">
-                    <img class="d-block w-100" src="public/assets/imgs/images2.jpg" alt="Second slide">
+                    <img class="d-block w-100" src="public/assets/imgs/image1.webp" alt="Second slide">
                 </div>
 
                 <div class="carousel-item">
-                    <img class="d-block w-100" src="public/assets/imgs/images3.jpg" alt="Third slide">
+                    <img class="d-block w-100" src="public/assets/imgs/images3.webp" alt="Third slide">
                 </div>
 
             </div>
@@ -79,7 +75,6 @@ export default function RoomCard(itemcard, index = 0) {
   containerCards.querySelector(".btn-reservar").addEventListener('click', (e) => {
     e.preventDefault();
 
-    // Corrigido: getElementById (não getElementsById)
     const idDateCheckin = document.getElementById('id-dateCheckIn');
     const idDateCheckOut = document.getElementById('id-dateCheckOut');
     const idGuestAmount = document.getElementById('id-guestAmount');
@@ -111,6 +106,7 @@ export default function RoomCard(itemcard, index = 0) {
       checkOut: fim,
       guests: qtd,
       daily,
+      nome,
       subtotal
     };
 

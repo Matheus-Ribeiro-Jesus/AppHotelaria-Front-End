@@ -10,7 +10,7 @@ export default function FormRoom() {
     container.className = 'card p-4 shadow-lg d-flex flex-row';
     container.style.width = '100%';
     container.style.maxWidth = '1020px';
-    container.style.height = '599px';
+    container.style.height = '620px';
     container.style.border = 'none';
     container.style.backgroundColor = '#ffffff';
     container.style.backdropFilter = 'blur(10px) brightness(0.8)';

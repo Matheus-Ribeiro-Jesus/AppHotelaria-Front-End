@@ -1,7 +1,5 @@
-import barraCategoria from "../components/barraCategoria.js";
 import Navbar from "../components/NavBar.js";
 import quartosInformacoes from "../components/quartosInformacoes.js";
-import buttonReservar from "../components/buttonReservar.js";
 
 export default function RenderCarrinhoPage(){
     
@@ -14,17 +12,10 @@ export default function RenderCarrinhoPage(){
 
     const navbar = Navbar();
     nav.appendChild(navbar);
+    
+    const informacoes = quartosInformacoes();
+    divRoot.appendChild(informacoes);
 
-    const categorias = barraCategoria();
-    divRoot.appendChild(categorias);
-
-    for(var i=0; i<1; i++){
-        const informacoes = quartosInformacoes();
-        divRoot.appendChild(informacoes);
-    };
-
-    const buttonReserv = buttonReservar();
-    divRoot.appendChild(buttonReserv);
 
 
 }
