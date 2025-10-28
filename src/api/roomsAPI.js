@@ -39,7 +39,6 @@ export async function listAvaibleQuartosRequest({ inicio, fim, qtd }){
     if(inicio){ 
         params.set("inicio", inicio);
     }  
-
     if(fim){
         params.set("fim", fim);
     }

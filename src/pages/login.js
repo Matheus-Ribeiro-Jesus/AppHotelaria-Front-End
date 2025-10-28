@@ -3,13 +3,20 @@ import Navbar from "../components/NavBar.js";
 import Footer from "../components/footer.js";
 import { loginRequest, saveToken } from "../api/authAPI.js";
 export default function renderLoginPage() {
-    
 
+    
+    document.body.style.background = "url('public/assets/imgs/background.jfif') no-repeat center center fixed";
+    document.body.style.backgroundSize = "cover";
+
+    
     const nav = document.getElementById('navbar');
     nav.innerHTML = '';
     
     const navbar = Navbar();
     nav.appendChild(navbar);
+    
+    document.body.style.background = "url('public/assets/imgs/background2.jpg') no-repeat center center fixed";
+    document.body.style.backgroundSize = "cover";
     
 
     const fot = document.getElementById('footer');
@@ -28,6 +35,7 @@ export default function renderLoginPage() {
     const email = contentForm.querySelector('input[type="email"]');
     const senha = contentForm.querySelector('input[type="password"]');
     const btnEntrar = contentForm.querySelector('button[type="submit"]');
+    btnEntrar.className = 'btn-css';
 
     // Monitora o clique no botão para acionar um evento de submeter os dados do form
     contentForm.addEventListener("submit", async (evento) => {
@@ -71,6 +79,9 @@ export default function renderLoginPage() {
 
     const texto = document.createElement('span');
     texto.textContent = 'Ainda não tem uma conta? ';
+    texto.className = 'registerButton';
+    texto.style.fontWeight = 'bold';
+    texto.style.fontSize = '18px';
 
     const criarConta = document.createElement('a');
     criarConta.href = 'register';
@@ -79,9 +90,7 @@ export default function renderLoginPage() {
 
     cadastrarSe.appendChild(texto);
     cadastrarSe.appendChild(criarConta);
-
     contentForm.insertBefore(cadastrarSe, contentForm.children[3]);
-
 
     
 }

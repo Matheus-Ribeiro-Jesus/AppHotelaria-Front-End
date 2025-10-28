@@ -8,9 +8,12 @@ export default function renderRegisterPage(){
     const nav = document.getElementById('navbar');
     nav.innerHTML = '';
 
+    document.body.style.background = "url('public/assets/imgs/background2.jpg') no-repeat center center fixed";
+    document.body.style.backgroundSize = "cover";
+
+
     const navbar = Navbar();
     nav.appendChild(navbar);
-
 
     const fot = document.getElementById('footer');
     fot.innerHTML = '';
@@ -28,17 +31,20 @@ export default function renderRegisterPage(){
     const InputNome = document.createElement('input');
     InputNome.type = 'text';
     InputNome.className = 'inputs';
+    InputNome.style.textAlign = 'left';
     InputNome.placeholder = 'Digite seu nome';
 
     const InputCpf = document.createElement('input');
     InputCpf.type = 'text';
     InputCpf.className = 'inputs';
+    InputCpf.style.textAlign = 'left';
     InputCpf.placeholder = 'Digite seu CPF';
 
     
     const InputTelefone = document.createElement('input');
     InputTelefone.type = 'text';
     InputTelefone.className = 'inputs';
+    InputTelefone.style.textAlign = 'left';
     InputTelefone.placeholder = 'Digite seu telefone';
 
     const inputEmail = formulario.querySelector('input[type="email"]');
@@ -48,6 +54,7 @@ export default function renderRegisterPage(){
     const confSenha = document.createElement('input');
     confSenha.type = 'password';
     confSenha.placeholder = 'Confirme sua senha';
+    confSenha.style.textAlign = 'left';
     confSenha.className = 'inputs';
 
 
@@ -62,6 +69,7 @@ export default function renderRegisterPage(){
 
     const btnRegister = formulario.querySelector('button');
     btnRegister.textContent = 'Criar conta';
+    btnRegister.className = 'btn-css';
 
     contentForm.addEventListener("submit", async (event) =>{
         event.preventDefault();

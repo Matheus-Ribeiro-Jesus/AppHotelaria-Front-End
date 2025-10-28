@@ -15,10 +15,10 @@ export function getCart(){
 }
 
 export function addItemToCart(item){
-    const cart = getCart();
-    cart.item.push(item);
-    setCart(cart);
-    return cart;
+    const hotel_cart = getCart();
+    hotel_cart.item.push(item);
+    setCart(hotel_cart);
+    return hotel_cart;
 
 }
 

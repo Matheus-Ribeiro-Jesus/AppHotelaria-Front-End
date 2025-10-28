@@ -3,13 +3,14 @@ import { addRoom } from '../api/roomsAPI.js';
 export default function FormRoom() {
     const DivRoot = document.getElementById('root');
     DivRoot.innerHTML = '';
+    DivRoot.className = 'mt-5';
     DivRoot.style.height = '100vh';
 
     const container = document.createElement('div');
     container.className = 'card p-4 shadow-lg d-flex flex-row';
     container.style.width = '100%';
     container.style.maxWidth = '1020px';
-    container.style.height = '588px';
+    container.style.height = '599px';
     container.style.border = 'none';
     container.style.backgroundColor = '#ffffff';
     container.style.backdropFilter = 'blur(10px) brightness(0.8)';
@@ -135,7 +136,7 @@ export default function FormRoom() {
     const btnSubmit = document.createElement('button');
     btnSubmit.type = 'submit';
     btnSubmit.textContent = 'Cadastrar Quarto';
-    btnSubmit.className = 'btn btn-primary mt-4';
+    btnSubmit.className = 'mt-4 btn-css';
     
     formulario.appendChild(btnSubmit);
 

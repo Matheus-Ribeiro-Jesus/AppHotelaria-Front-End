@@ -5,35 +5,27 @@ import RoomCard from "../components/roomCard.js";
 import DateSelector from "../components/DateSelector.js";
 import { listAvaibleQuartosRequest } from "../api/roomsAPI.js";
 import Spinner from "../components/spinner.js";
-import modal from "../components/modal.js";
+import modal from "../components/modal.js";  
 import cartLounge from "../components/cartLounge.js";
 
 export default function renderHomePage() {
-
     const divRoot = document.getElementById('root');
     divRoot.innerHTML = '';
 
-    // NavBar
     const nav = document.getElementById('navbar');
     nav.innerHTML = '';
-    const navbar = Navbar();
-    nav.appendChild(navbar);
-    
-    // Carrosel
-    const hero = Hero();
-    divRoot.appendChild(hero);
+    nav.appendChild(Navbar());
 
-    // Campo pesquisar
+        
+    // document.body.style.background = "url('public/assets/imgs/teste.jpeg') no-repeat center center fixed";
+    // document.body.style.backgroundSize = "cover";
+
+    divRoot.appendChild(Hero());
+
     const datePesquisar = DateSelector();
     divRoot.appendChild(datePesquisar);
 
     const [dateCheckIn, dateCheckOut] = datePesquisar.querySelectorAll('input[type="date"]'); 
-    
-    // Impedindo datas passadas 
-    const hoje = new Date().toISOString().split("T")[0]; // --> Converte a data para o formato padrão ISO / exemplo -> "2025-10-08 T 17:34:52.123Z " -> ".split("T")[0]" / Corta a string no “T” e pega só a parte da data ("2025-10-08").
-    dateCheckIn.min = hoje;
-    dateCheckOut.min = hoje;
-
     const guestAmount = datePesquisar.querySelector('select');
     const btnSearchRoom = datePesquisar.querySelector('button');
 
@@ -41,73 +33,79 @@ export default function renderHomePage() {
     dateCheckIn.id = 'id-dateCheckIn';
     dateCheckOut.id = 'id-dateCheckOut';
 
+    const hoje = new Date().toISOString().split("T")[0];
+    dateCheckIn.min = hoje;
+    dateCheckOut.min = hoje;
+
     const divCards = document.createElement('div');
-    divCards.innerHTML = '';
     divCards.className = "cards";
     divCards.id = "cards-result";
 
     const cardsGroupInfra = document.createElement('div');
     cardsGroupInfra.className = "cards";
+
     const tituloInfra = document.createElement('h2');
     tituloInfra.textContent = 'Conheça nosso hotel';
+    tituloInfra.style.fontWeight = 'bold';
+    tituloInfra.style.color = 'black';
     tituloInfra.style.textAlign = 'center';
 
     const loungeItems = [
-        {path: "varanda.jpg", title: "Restaurante", text: "Nosso restaurante é o melhor que tem na cidade "},
-        {path: "spa.avif", title: "SPA", text: "Nosso SPA é oferece tudo que você precisa para relaxar"},
-        {path: "bar.jpg", title: "Bar", text: "Bebidas geladas e refrescante com show ao vivo"},
-
+        { path: "varanda.jpg", title: "Restaurante", text: "Nosso restaurante é o melhor que tem na cidade." },
+        { path: "spa.avif", title: "SPA", text: "Nosso SPA oferece tudo que você precisa para relaxar." },
+        { path: "bar.jpg", title: "Bar", text: "Bebidas geladas e refrescantes com show ao vivo." },
     ];
 
-    // Percorre a array loungeItems
-    for (let i = 0; i < loungeItems.length; i++){
-        const cardLounge = cartLounge(loungeItems[i], i);
-        cardsGroupInfra.appendChild(cardLounge);
-    }
-    // A depender da data de checkin será calculado o minimo para a data de checkout (O minimo de diarias)
-    function getMinDateCheckout(dateCheckIn){
+    loungeItems.forEach((item, i) => {
+        cardsGroupInfra.appendChild(cartLounge(item, i));
+    });
+
+    function getMinDateCheckout(dateCheckIn) {
         const minDaily = new Date(dateCheckIn);
         minDaily.setDate(minDaily.getDate() + 1);
         return minDaily.toISOString().split('T')[0];
     }
 
-    // Evento para monitorar a alteração no data de check-in para mudar o calendario do checkout
-
-    dateCheckIn.addEventListener('change', async (e) => {
-        // Se houver um valor valido em dateCheckin
-        if(dateCheckIn.value){
+    dateCheckIn.addEventListener('change', () => {
+        if (dateCheckIn.value) {
             const minDateCheckout = getMinDateCheckout(dateCheckIn.value);
             dateCheckOut.min = minDateCheckout;
 
-        // Se ja houver um data de chec-out selecionada e for invalida
-            if(dateCheckOut.value && dateCheckOut.value <= dateCheckIn.value){
+            if (dateCheckOut.value && new Date(dateCheckOut.value) <= new Date(dateCheckIn.value)) {
                 dateCheckOut.value = "";
-                alert('A data de check-out deve ser posterior à data de check-in.');
+                const modal2 = modal({
+                    title: "Erro",
+                    message: "A data de check-out deve ser posterior à data de check-in."
+                });
+
+                const exist = document.getElementById('modalAviso');
+                if(exist) exist.remove();
+
+                document.body.appendChild(modal2);
+                new bootstrap.Modal(modal2).show();
+                return;
             }
         }
-
     });
 
     btnSearchRoom.addEventListener("click", async (evento) => {
         evento.preventDefault();
+
         const inicio = (dateCheckIn?.value || "").trim();
         const fim = (dateCheckOut?.value || "").trim();
         const qtd = parseInt(guestAmount?.value || "0", 10);
 
-        if(!inicio || !fim || Number.isNaN(qtd) || qtd <= 0){
-            const mod3 = modal({
-                    title: "Aviso!",
-                    message: "Preencha todos os campos"
-                });
-                const Modal = document.getElementById("modalAviso");
-                if (Modal) Modal.remove();
+        if (!inicio || !fim || Number.isNaN(qtd) || qtd <= 0) {
+            const mod = modal({
+                title: "Aviso!",
+                message: "Por favor, preencha todos os campos."
+            });
 
-                document.body.appendChild(mod3);
-
-                // Inicializa e exibe o modal
-                const bootstrapModal = new bootstrap.Modal(mod3);
-                bootstrapModal.show();
-                return;
+            const modalExistente = document.getElementById("modalAviso");
+            if (modalExistente) modalExistente.remove();
+            document.body.appendChild(mod);
+            new bootstrap.Modal(mod).show();
+            return;
         }
 
         const dtInicio = new Date(inicio);
@@ -119,15 +117,11 @@ export default function renderHomePage() {
                 message: "A data de check-out deve ser posterior à data de check-in."
             });
 
-            const Modal = document.getElementById("modalAviso");
-            if (Modal) Modal.remove();
+            const modalExistente = document.getElementById("modalAviso");
+            if (modalExistente) modalExistente.remove();
 
             document.body.appendChild(mod);
-
-            // Inicializa e exibe o modal
-            const bootstrapModal = new bootstrap.Modal(mod);
-            bootstrapModal.show();
-
+            new bootstrap.Modal(mod).show();
             return;
         }
 
@@ -135,45 +129,51 @@ export default function renderHomePage() {
         const spi = Spinner();
         divCards.appendChild(spi);
 
-        try{
-            const quartos = await listAvaibleQuartosRequest({inicio, fim, qtd});
+        try {
+            const quartos = await listAvaibleQuartosRequest({ inicio, fim, qtd });
             spi.remove();
-            if(!quartos.length){
+
+            if (!quartos.length) {
                 const mod = modal({
                     title: "Aviso!",
-                    message: "Nenhum quarto disponivel para esse periodo"
+                    message: "Nenhum quarto disponível para esse período."
                 });
 
-                const mods = document.getElementById("modalAviso");
-                document.body.appendChild(mods);
+                const modalExistente = document.getElementById("modalAviso");
+                if (modalExistente) modalExistente.remove();
 
-                const bootstrapModal = new bootstrap.Modal(mod);
-                bootstrapModal.show();
+                document.body.appendChild(mod);
+                new bootstrap.Modal(mod).show();
                 return;
             }
 
             divCards.innerHTML = '';
             quartos.forEach((itemcard, i) => {
                 divCards.appendChild(RoomCard(itemcard, i));
-            })
-        }
-        catch(erro){
-            console.log(erro);
+            });
+
+        } catch (erro) {
+            console.error("Erro ao listar quartos:", erro);
             spi.remove();
+
+            const mod = modal({
+                title: "Erro",
+                message: "Ocorreu um erro ao buscar os quartos. Tente novamente."
+            });
+
+            const modalExistente = document.getElementById("modalAviso");
+            if (modalExistente) modalExistente.remove();
+
+            document.body.appendChild(mod);
+            new bootstrap.Modal(mod).show();
         }
     });
 
     divRoot.appendChild(divCards);
     divRoot.appendChild(tituloInfra);
     divRoot.appendChild(cardsGroupInfra);
-    
-    //Footer
+
     const fot = document.getElementById('footer');
     fot.innerHTML = '';
-
-    const footer = Footer();
-    fot.appendChild(footer);
-
-
-    
+    fot.appendChild(Footer());
 }

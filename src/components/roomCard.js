@@ -1,4 +1,5 @@
 import { addItemToCart } from '../store/cartStore.js';
+import modal from './modal.js';
 
 function calculoDiaria(checkIn, checkOut) {
     // const checkIn = "2026-01-01";
@@ -78,42 +79,54 @@ export default function RoomCard(itemcard, index = 0) {
   containerCards.querySelector(".btn-reservar").addEventListener('click', (e) => {
     e.preventDefault();
 
-    // Ler informações setadas nos inputs dateChekcin , dateCheckout e guestAmount (seu)
+    // Corrigido: getElementById (não getElementsById)
+    const idDateCheckin = document.getElementById('id-dateCheckIn');
+    const idDateCheckOut = document.getElementById('id-dateCheckOut');
+    const idGuestAmount = document.getElementById('id-guestAmount');
 
-    const idDateCheckin = document.getElementsById('id-dateCheckIn');
-    const idDateCheckOut = document.getElementsById('id-dateCheckOut');
-    const idguestAmount = document.getElementsById('id-guestAmount');
+    const inicio = (idDateCheckin?.value || "").trim();
+    const fim = (idDateCheckOut?.value || "").trim();
+    const qtd = parseInt(idGuestAmount?.value || "0", 10);
 
-    const inicio = (idDateCheckin?.valiue || "");
-    const fim = (idDateCheckOut?.value || "");
-    const qtd = parseInt(idguestAmount?.value || "0", 10);
-    if(!inicio || !fim || Number.isNaN(qtd) || qtd <= 0){
-        console.log("Preencha todos os campos");
-        return;
+    if (!inicio || !fim || Number.isNaN(qtd) || qtd <= 0) {
+      const mod2 = modal({
+        title: "Preencha todos os campos",
+        message: "Por favor, preencha as datas e a quantidade de hóspedes."
+      });
 
+      const exist = document.getElementById('modalAviso');
+      if(exist) exist.remove();
+
+      document.body.appendChild(mod2);
+      new bootstrap.Modal(mod2).show();
+      return;
     }
-    const dailty = calculoDiaria(inicio, fim);
 
-    const subtotal = parseFloat(preco) * dailty;
-    console.log(subtotal);
+    const daily = calculoDiaria(inicio, fim);
+    const subtotal = parseFloat(preco) * daily;
 
     const novoItemReserva = {
-        id,
-        checkIn: inicio,
-        checkOut: fim,
-        guests: qtd,
-        daily,
-        subtotal
-    }
+      id,
+      checkIn: inicio,
+      checkOut: fim,
+      guests: qtd,
+      daily,
+      subtotal
+    };
+
+    addItemToCart(novoItemReserva);
+    const mod = modal({
+        title: "Reserva realizada.",
+        message: `Nome do quarto: ${nome}<br>Diárias: ${daily}<br>Subtotal: R$ ${subtotal.toFixed(2)}`
+    });
+
+    const modalExiste = document.getElementById("modalAviso");
+    if(modalExiste) modalExiste.remove();
+    document.body.appendChild(mod);
+    new bootstrap.Modal(mod).show();
+    return;
+
   });
 
-
-  addItemToCart(novoItemReserva);
-  alert(`Reserva do quarto adicionada: ${nome} - Preço/Diaria: R$ ${preco} - Numero de diarias: ${dailty} - Subtotal: R$ ${subtotal} `);
-  
-  
-
-
-  console.log(calculoDiaria());
   return containerCards;
 }

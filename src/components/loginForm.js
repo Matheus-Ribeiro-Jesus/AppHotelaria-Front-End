@@ -10,7 +10,7 @@ export default function LoginForm() {
     container.className = 'card p-4 shadow-lg d-flex flex-row'; 
     container.style.width = '100%';
     container.style.maxWidth = '900px'; 
-    container.style.height = '500px';
+    container.style.height = '550px';
     container.style.border = 'none';
     container.style.backgroundColor = '#ffffff';
     container.style.backdropFilter = 'blur(10px) brightness(0.8)';
@@ -47,6 +47,7 @@ export default function LoginForm() {
     email.placeholder = "Digite seu email";
     email.className = 'inputs';
     email.style.textAlign = 'center';
+    email.style.textAlign = 'left';
     formulario.appendChild(email);
 
 
@@ -55,13 +56,13 @@ export default function LoginForm() {
     senha.placeholder = "Digite sua senha";
     senha.className = 'inputs';
     senha.style.textAlign = 'center';
+    senha.style.textAlign = 'left';
     formulario.appendChild(senha);
 
     const entrar = document.createElement('button');
     entrar.type = 'submit';
-    entrar.className = "btn btn-primary";
+    entrar.className = "btn btn-primary mt-4";
     entrar.textContent = "Entrar";
-
     formulario.appendChild(entrar);
 
     // Montando a hierarquia

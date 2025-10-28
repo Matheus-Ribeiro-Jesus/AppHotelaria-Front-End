@@ -47,7 +47,7 @@ class QuartosController{
     }
 
     public static function update($conn, $id, $data){
-        ValidatorController::validate_data($data, ["nome", "numero", "qtd_casal", "qtd_solteiro", "preco", "disponivel"]);
+        ValidatorController::validate_data($data, ["nome", "numero", "qtd_cama_casal", "qtd_cama_solteiro", "preco", "disponivel"]);
         $result = QuartosModel::update($conn, $id, $data);
         if ($result) {
             return jsonResponse(['message' => 'Quarto atualizado com sucesso']);

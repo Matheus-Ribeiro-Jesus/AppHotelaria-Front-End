@@ -3,6 +3,9 @@ export default function modal({ title = "Aviso", message = "Algo deu errado." })
     modalDiv.className = "modal fade";
     modalDiv.id = "modalAviso";
     modalDiv.tabIndex = -1;
+
+    
+    
     modalDiv.innerHTML = `
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">

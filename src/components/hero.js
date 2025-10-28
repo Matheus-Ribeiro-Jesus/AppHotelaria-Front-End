@@ -14,15 +14,15 @@ export default function Hero() {
     <div class="carousel-inner shadow">
 
         <div class="carousel-item active">
-            <img class="d-block w-100" src="public/assets/imgs/images2.jpg" alt="First slide">
+            <img class="d-block w-100" src="public/assets/imgs/image1.webp" alt="First slide">
         </div>
 
         <div class="carousel-item">
-            <img class="d-block w-100" src="public/assets/imgs/images2.jpg" alt="Second slide">
+            <img class="d-block w-100" src="public/assets/imgs/image2.jpg" alt="Second slide">
         </div>
 
         <div class="carousel-item">
-            <img class="d-block w-100" src="public/assets/imgs/images3.jpg" alt="Third slide">
+            <img class="d-block w-100" src="public/assets/imgs/image3.webp" alt="Third slide">
         </div>
 
     </div>

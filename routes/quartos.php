@@ -16,7 +16,7 @@ if ( $_SERVER['REQUEST_METHOD'] === "GET" ){
             QuartosController::get_available($conn, $data);
         }
         else{
-            jsonResponse(['message'=>'Essa Rota não existe'], 400);
+            jsonResponse(['message'=>'Essa rota não existe'], 400);
         }
     }else{
         QuartosController::getAll($conn);
