@@ -43,7 +43,7 @@ class AuthController{
     }
 
     public static function loginClient($conn, $data){
-        ValidatorController::validate_data($data, ["email, senha"]);
+        ValidatorController::validate_data($data, ["email", "senha"]);
 
 
         $data['email'] = trim($data['email']);

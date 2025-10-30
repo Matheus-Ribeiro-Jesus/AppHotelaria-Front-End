@@ -18,12 +18,13 @@ function validateToken($token)
     try {
         $key = new Key(SECRET_KEY, "HS256");
         $decode = JWT::decode($token, $key);
-        return $decode->sub;
+        $result = json_decode(json_encode($decode->sub), true);
+        return $result;
     } catch (Exception $erro) {
         return false;
     }
 }
-function validateTokenAPI()
+function validateTokenAPI($cargo)
 {
     $headers = getallheaders();
     if (!isset($headers["Authorization"])) {
@@ -31,10 +32,18 @@ function validateTokenAPI()
         exit;
     }
     $token = str_replace("Bearer ", "", $headers['Authorization']);
-    if(!validateToken($token)){
+    $user = validateToken($token);
+    
+    if(!$user){
         jsonResponse(['message' => 'Token Invalido'], 401);
         exit;
     }
+    if($user['cargo'] != $cargo){
+        jsonResponse(['message' => 'Usuario não autorizado!'], 401);
+        exit;
+    }
+    return $user;
+
 }
 
 

@@ -18,6 +18,10 @@
     // fim = '2025-10-09 12:00:00'
 
 
+
+    echo PasswordController::generateHash('123');
+    
+
     // http://localhost/estudo_php/api/quartos/disponiveis?checkin=2025-09-28&checkout=2025-10-02&pessoas=3
 
 ?>
