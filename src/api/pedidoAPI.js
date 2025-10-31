@@ -1,23 +1,27 @@
-export async function finishedOrder(items){
+import { getToken } from "./authAPI.js";
+
+export async function finishedOrder(item, metodoPagamento){
     const url = "api/pedido/reserva";
     const body = {
-        // Por enquanto todos os pagamentos será por pix até termos um front para usuario setar pagamento que deseja
-        cliente_id: 5,
-        pagamento: "pix",
-        quartos: items.map(it => (
+        pagamento: metodoPagamento,
+        quartos: item.map(item => (
             {
-                id: it.quartosId,
-                inicio: it.checkIn,
-                fim: it.checkOut
+                id: item.id,
+                inicio: item.checkIn,
+                fim: item.checkOut
             }
         ))
     };
+
+    const token = getToken?.();
+
 
     const res = await fetch(url, {
         method: "POST",
         headers: {
             "Accept": "application/json",
-            "Content-Type": "apllication/json"
+            "Content-Type": "apllication/json",
+            "Authorization": `Bearer ${token}`
         },
         credentials: "same-origin",
         body: JSON.stringify(body)
@@ -28,7 +32,7 @@ export async function finishedOrder(items){
         data = await res.json();
     }catch{ data = null; }
 
-    if(!data){
+    if(!res.ok){
         const message = `Erro ao enviar pedido: ${res.status}`;
         return { ok: false, raw: data, message };
     }
